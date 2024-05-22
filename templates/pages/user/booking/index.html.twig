@@ -1,0 +1,23 @@
+{% extends 'themes/base_user.html.twig' %}
+
+{% block title %}Réservez un terrain{% endblock %}
+
+{% block description %}Réservez un terrain{% endblock %}
+
+{% block keywords %}Padel, Tennis, Club, Time, Reservation, Terrain, Piste{% endblock %}
+
+{% block main %}
+
+    <div class="grey2">
+        <h1 class="text-center text-white">Reservez un terrain</h1>
+
+        <div class="container">
+            <ul class="text-center">
+                {% for day in days %}
+                    <li class="btn btn-light">{{ day|date('l d', 'Europe/Paris', 'fr') }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

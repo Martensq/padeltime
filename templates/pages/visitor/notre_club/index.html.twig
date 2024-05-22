@@ -1,0 +1,99 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Notre Club{% endblock %}
+
+{% block description %}Tarifs et horaires{% endblock %}
+
+{% block keywords %}Padel, Tennis, Club, Time, Tarifs, Horaires, Lieux, Trouver{% endblock %}
+
+{% block main %}
+
+    <div class="grey2 text-center ">
+        <!-- Titre -->
+        <h1 class="py-5 text_size_xl text-white">TARIFS ET HORAIRES</h1>
+
+        <!-- Horaires -->
+        <section class="container">
+            <div>
+                <h2 class="text_size_l pb-4 text-white">Ouvert tous les jours</h2>
+                <p class="text-white">Lundi au vendredi + jours fériés : 10h - 22h</p>
+                <p class="text-white">Week-end : 10h - 00h</p>
+            </div>
+
+            <!-- Cartes tarifs -->
+            <div class="d-flex flex-column align-items-center mt-5 flex-md-row justify-content-md-evenly">
+                <article class="card card_size border-dark mb-3">
+                    <div class="card-header">
+                        <h4 class="mt-2">Heures creuses</h4>
+                    </div>
+                    <div class="card-body d-flex flex-column justify-content-evenly">
+                        <h5 class="card-title">8€ / heure / personne</h5>
+                        <div>
+                            <p class="card-text">du lundi au vendredi</p>
+                            <p class="card-text">de 10h à 17h</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="card card_size border-dark mb-3">
+                    <div class="card-header">
+                        <h4 class="mt-2">Heures pleines</h4>
+                    </div>
+                    <div class="card-body d-flex flex-column justify-content-evenly">
+                        <h5 class="card-title">10€ / heure / personne</h5>
+                        <div>
+                            <p class="card-text">du lundi au vendredi</p>
+                            <p class="card-text">de 17h à 22h</p>
+                            <p class="card-text">+ week-end</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Loc/achat matériels -->
+            <div class="mt-5 mb-4" >
+                <img src="/logos/raquette.png" class="mb-2" width="60px" alt="">
+                <p class="text-white">Location raquette : 2€</p>
+            </div>
+            <div class="mb-5">
+                <img src="/logos/balle.png" class="mb-2" width="40px" alt="">
+                <p class="text-white">Achat balles : 6€</p>
+            </div>
+            <a class="mb-5 btn btn-primary btn-lg blue_color btn_resa" href="{{path('user_booking_index')}}">Réservez un terrain</a>
+        </section>
+
+        <!-- Nous trouver -->
+        <section class="text-center grey1" id="nous_trouver">
+            <div class="py-5 container d-flex">
+                <!-- MAP -->
+                <iframe class="d-none d-md-block d-lg-block me-2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4422.119655573427!2d2.50093447991292!3d48.774099089329695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e60d632186a0c1%3A0x20594726f144f0e4!2sPadel-Horizon!5e0!3m2!1sfr!2sfr!4v1712687305491!5m2!1sfr!2sfr" width="550" height="525" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                <!-- INFOS -->
+                <article class="d-flex mx-auto flex-column text-white">
+                    <h3 class="text_size_l">Padel Time</h3>
+                    <div>
+                        <div class="my-5">
+                            <img src="/logos/localisation.png" class="mb-2" width="60" alt="">
+                            <p class="text_size_m">3 bis rue de Paris, 94370 Sucy-en-brie</p>
+                        </div>
+                        <div class="mb-5">
+                            <img src="/logos/tel.png" class="mb-2" width="50" alt="">
+                            <p class="text_size_m">06.33.47.49.60</p>
+                        </div>
+                        <div>
+                            <img src="/logos/mail.png" class="mb-2" width="50" alt="">
+                            <p class="text_size_m">quentin.martens@orange.fr</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Logo FFT -->
+        <section class="grey2">
+            <div class="container text-center py-5">
+                <a href="https://www.fft.fr/jouer/le-padel" target="_blank"><img class="w-25" src="/logos/logo_padel_fft.png" alt="FFT"></a>
+            </div>
+        </section>
+    </div>
+
+{% endblock %}
