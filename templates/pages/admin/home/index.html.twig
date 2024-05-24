@@ -10,5 +10,14 @@
 {% block main %}
     <h1 class="text-center my-3 display-5">Espace admin</h1>
 
-    <p class="text-center">Hello {{ app.user.firstName }}!</p>
+    <p class="text-center">{{ app.user.firstName }} {{ app.user.lastName }}</p>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mx-auto text-center card shadow p-0">
+                <h2 class="card-header bg-dark text-white">Les pistes de padel</h2>
+                <span class="card-body">{{courts|length}}</span>
+            </div>
+        </div>
+    </div>
 {% endblock %}
