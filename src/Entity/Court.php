@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CourtRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CourtRepository::class)]
 class Court
@@ -13,6 +14,16 @@ class Court
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: "Le numéro de la piste est obligatoire")]
+    #[Assert\Length(
+        max: 2,
+        maxMessage: "Le numéro ne doit pas dépasser {{ limit }} chiffres.",
+    )]
+    #[Assert\Regex(
+        pattern: "/[1-9]+/",
+        match: true,
+        message: 'Seuls les chiffres supérieurs à 0 sont autorisés.',
+    )]
     #[ORM\Column]
     private ?int $courtNumber = null;
 
@@ -35,7 +46,7 @@ class Court
         return $this->courtNumber;
     }
 
-    public function setCourtNumber(int $courtNumber): static
+    public function setCourtNumber(?int $courtNumber): ?static
     {
         $this->courtNumber = $courtNumber;
 

@@ -3,7 +3,9 @@
 namespace App\Controller\Admin\Court;
 
 
+use App\Entity\Court;
 use DateTimeImmutable;
+use App\Form\AdminCourtFormType;
 use App\Repository\CourtRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,70 +33,75 @@ class CourtController extends AbstractController
     }
 
 
-    // #[Route('/court/create', name: 'admin_court_create', methods: ['GET', 'POST'])]
-    // public function create(Request $request): Response
-    // {
-    //     $category = new Category();
+    #[Route('/court/create', name: 'admin_court_create', methods: ['GET'])]
+    public function create(): Response
+    {
+        $court = new Court();
+
+        $court  ->setCourtNumber(\count($this->courtRepository->findAll()) + 1)
+                ->setAvailable(false)
+                ->setCreatedAt(new DateTimeImmutable())
+                ->setUpdatedAt(new DateTimeImmutable());
+
+        $this->em->persist($court);
+
+        $this->em->flush();
         
-    //     $form = $this->createForm(AdminCategoryFormType::class, $category);
+        $this->addFlash('success', "Une nouvelle piste a été ajoutée avec succès.");
+
+        return $this->redirectToRoute('admin_court_index');
+    }
+
+    #[Route('/court/{id<\d+>}/available}', name: 'admin_court_available', methods: ['GET', 'POST'])]
+    public function available(Court $court): Response
+    {
+        $court  ->setAvailable(!$court->isAvailable())
+                ->setUpdatedAt(new DateTimeImmutable());
+
+        $this->em->persist($court);
+        $this->em->flush();
+
+        $this->addFlash('success', "La disponibilité de la piste {$court->getCourtNumber()} a été modifée");
+        return $this->redirectToRoute('admin_court_index');
+    }
+
+    #[Route('/court/{id<\d+>}/edit', name: 'admin_court_edit', methods: ['GET', 'POST'])]
+    public function edit(Court $court, Request $request): Response
+    {    
+        $form = $this->createForm(AdminCourtFormType::class, $court);
+
+        $form->handleRequest($request);
         
-    //     $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $court->setUpdatedAt(new DateTimeImmutable());
 
-    //     if ($form->isSubmitted() && $form->isValid())
-    //     {
-    //         $category->setCreatedAt(new DateTimeImmutable());
-    //         $category->setUpdatedAt(new DateTimeImmutable());
+            $this->em->persist($court);
+            $this->em->flush();
 
-    //         $this->em->persist($category);
+            $this->addFlash("success", "Le numéro du court a été modifié");
 
-    //         $this->em->flush();
+            return $this->redirectToRoute("admin_court_index");
+        }
+
+        return $this->render("pages/admin/court/edit.html.twig", [
+            'court' => $court,
+            'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('/court/{id<\d+>}/delete}', name: 'admin_court_delete', methods: ['POST'])]
+    public function delete(Court $court, Request $request): Response
+    {
+        if ($this->isCsrfTokenValid('delete_court_'.$court->getId(), $request->request->get('_csrf_token')))
+        {
+            $this->addFlash('success', "La piste {$court->getCourtNumber()} a été supprimée");
             
-    //         $this->addFlash('success', "La catégorie {$category->getName()} a été ajoutée avec succès.");
+            $this->em->remove($court);
+            $this->em->flush();
+        }
 
-    //         return $this->redirectToRoute('admin_category_index');
-    //     }
-
-    //     return $this->render('pages/admin/category/create.html.twig', [
-    //         "form" => $form->createView()
-    //     ]);
-    // }
-
-    // #[Route('/category/{id<\d+>}/edit}', name: 'admin_category_edit', methods: ['GET', 'POST'])]
-    // public function edit(Category $category, Request $request): Response
-    // {
-    //     $form = $this->createForm(AdminCategoryFormType::class, $category);
-        
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid())
-    //     {
-    //         $category->setUpdatedAt(new DateTimeImmutable());
-
-    //         $this->em->persist($category);
-    //         $this->em->flush();
-
-    //         $this->addFlash('success', "La catégorie {$category->getName()} a été modifée");
-    //         return $this->redirectToRoute('admin_category_index');
-    //     }
-
-    //     return $this->render("pages/admin/category/edit.html.twig", [
-    //         "form" => $form->createView(),
-    //         "category" => $category
-    //     ]);   
-    // }
-
-    // #[Route('/category/{id<\d+>}/delete}', name: 'admin_category_delete', methods: ['POST'])]
-    // public function delete(Category $category, Request $request): Response
-    // {
-    //     if ($this->isCsrfTokenValid('delete_category_'.$category->getId(), $request->request->get('_csrf_token')))
-    //     {
-    //         $this->addFlash('success', "La catégorie {$category->getName()} a été supprimée");
-            
-    //         $this->em->remove($category);
-    //         $this->em->flush();
-    //     }
-
-    //     return $this->redirectToRoute("admin_category_index");
-    // }
+        return $this->redirectToRoute("admin_court_index");
+    }
 
 }
