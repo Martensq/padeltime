@@ -97,8 +97,9 @@
 
     <!-- Map et Form -->
 
-    <section class="text-center grey1">
+    <section id="contact" class="text-center grey1">
         <div class="py-4 container">
+            {% include 'components/_alert.html.twig' %}
             <div class="row">
 
                 <!-- Map -->
@@ -109,37 +110,40 @@
 
                 <!-- Form -->
 
-                <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
-                    <h3 class="text-white text_size_l pb-4">Nous contacter</h3>
-                    {# {{ form_start(form) }}
+                <div class="col-lg-4 mx-auto text-white">
+                    <h3 class="text_size_l pb-4">Nous contacter</h3>
+
+                    {{ form_start(form) }}
                         <div class="mb-3">
-                            <label for="contact_form_firstName">Prénom</label>
+                            <label for="contact_form_firstName">Prénom <span class="text-danger">*</span></label>
                             {{ form_widget(form.firstName, {'attr': {'class':'form-control'}}) }}
                             <div class="text-danger">{{ form_errors(form.firstName) }}</div>
                         </div>
                         <div class="mb-3">
-                            <label for="contact_form_lastName">Nom</label>
+                            <label for="contact_form_lastName">Nom <span class="text-danger">*</span></label>
                             {{ form_widget(form.lastName, {'attr': {'class':'form-control'}}) }}
                             <div class="text-danger">{{ form_errors(form.lastName) }}</div>
                         </div>
                         <div class="mb-3">
-                            <label for="contact_form_email">Email</label>
+                            <label for="contact_form_email">Email <span class="text-danger">*</span></label>
                             {{ form_widget(form.email, {'attr': {'class':'form-control'}}) }}
                             <div class="text-danger">{{ form_errors(form.email) }}</div>
                         </div>
                         <div class="mb-3">
-                            <label for="contact_form_phone">Phone</label>
+                            <label for="contact_form_phone">Phone <span class="text-danger">*</span></label>
                             {{ form_widget(form.phone, {'attr': {'class':'form-control'}}) }}
                             <div class="text-danger">{{ form_errors(form.phone) }}</div>
                         </div>
                         <div class="mb-3">
-                            <label for="contact_form_comment">Commentaire</label>
-                            {{ form_widget(form.comment, {'attr': {'class':'form-control'}}) }}
+                            <label for="contact_form_message">Commentaire <span class="text-danger">*</span></label>
+                            {{ form_widget(form.message, {'attr': {'class':'form-control'}}) }}
+                            <div class="text-danger">{{ form_errors(form.message) }}</div>
                         </div>
                         <div>
                             <input formnovalidate type="submit" class="btn btn-primary shadow">
                         </div>
-                    {{ form_end(form) }} #}
+                    {{ form_end(form) }}
+
                 </div>
 
             </div>
