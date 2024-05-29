@@ -1,0 +1,78 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Contactez-nous{% endblock %}
+
+{% block description %}Contactez-nous{% endblock %}
+
+{% block keywords %}Padel, Tennis, Club, Time, Contact{% endblock %}
+
+{% block main %}
+
+    <div class="grey2 text-white text-center">
+        <div class="container">
+            <!-- Contact et coordonnées -->
+            <section>
+                <!-- Titre -->
+                <h1 class="text_size_xl py-5">NOUS CONTACTER</h1>
+
+                <!-- Form -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-lg-4 mx-auto">
+                            {{ form_start(form) }}
+                                <div class="mb-3">
+                                    <label for="contact_form_firstName">Prénom</label>
+                                    {{ form_widget(form.firstName, {'attr': {'class':'form-control'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.firstName) }}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contact_form_lastName">Nom</label>
+                                    {{ form_widget(form.lastName, {'attr': {'class':'form-control'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.lastName) }}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contact_form_email">Email</label>
+                                    {{ form_widget(form.email, {'attr': {'class':'form-control'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.email) }}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contact_form_phone">Phone</label>
+                                    {{ form_widget(form.phone, {'attr': {'class':'form-control'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.phone) }}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contact_form_message">Commentaire</label>
+                                    {{ form_widget(form.message, {'attr': {'class':'form-control'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.message) }}</div>
+                                </div>
+                                <div>
+                                    <input formnovalidate type="submit" class="btn btn-primary shadow">
+                                </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coordonnées -->
+                <div class="d-flex flex-column align-items-center flex-md-row justify-content-md-evenly pb-5">
+                    <div class="ms-md-5">
+                        <img src="/logos/tel.png" class="mb-2" width="50" alt="">
+                        <p class="text_size_m">06.33.47.49.60</p>
+                    </div>
+                    <div>
+                        <img src="/logos/mail.png" class="mb-2" width="50" alt="">
+                        <p class="text_size_m">quentin.martens@orange.fr</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="d-flex flex-column align-items-center">
+                <h2 class="text_size_l">Nous trouver</h1>
+                <iframe class="my-5 d-md-none d-lg-none" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4422.119655573427!2d2.50093447991292!3d48.774099089329695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e60d632186a0c1%3A0x20594726f144f0e4!2sPadel-Horizon!5e0!3m2!1sfr!2sfr!4v1712687305491!5m2!1sfr!2sfr" width="350" height="200" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe class="my-5 d-none d-md-block d-lg-none" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4422.119655573427!2d2.50093447991292!3d48.774099089329695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e60d632186a0c1%3A0x20594726f144f0e4!2sPadel-Horizon!5e0!3m2!1sfr!2sfr!4v1712687305491!5m2!1sfr!2sfr" width="650" height="400" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe class="my-5 d-none d-md-none d-lg-block" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4422.119655573427!2d2.50093447991292!3d48.774099089329695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e60d632186a0c1%3A0x20594726f144f0e4!2sPadel-Horizon!5e0!3m2!1sfr!2sfr!4v1712687305491!5m2!1sfr!2sfr" width="900" height="525" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </section>
+        </div>
+    </div>
+
+{% endblock %}
