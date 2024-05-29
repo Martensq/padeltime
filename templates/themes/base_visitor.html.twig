@@ -64,7 +64,10 @@
 
                     <!-- Boutons -->
                     <div class="d-flex align-items-end">
-                        <a class="flex-column pe-4" href="{{path('visitor_authentication_login')}}"><img src="/logos/utilisateur.png" width="30" alt=""></a>
+                        {% if app.user and is_granted('ROLE_ADMIN') %}
+                            <a class="pe-3" href="{{path('admin_home')}}"><img src="/logos/cadenas.png" width="40" alt=""></a>
+                        {% endif %}
+                        <a class="pe-4" href="{{path('visitor_authentication_login')}}"><img src="/logos/utilisateur.png" width="40" alt=""></a>
                         <a href="{{path('user_booking_index')}}"><img src="/logos/reservation_bleu.png" width="50" alt=""></a>
                     </div>
                 </div>
