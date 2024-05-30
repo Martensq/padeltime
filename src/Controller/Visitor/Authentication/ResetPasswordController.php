@@ -8,6 +8,7 @@ use Symfony\Component\Mime\Address;
 use App\Form\ChangePasswordFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\ResetPasswordRequestFormType;
+use App\Repository\SettingRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -28,7 +29,8 @@ class ResetPasswordController extends AbstractController
 
     public function __construct(
         private ResetPasswordHelperInterface $resetPasswordHelper,
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
+        private SettingRepository $settingRepository
     ) {
     }
 
@@ -52,6 +54,7 @@ class ResetPasswordController extends AbstractController
 
         return $this->render('pages/visitor/authentication/reset_password/request.html.twig', [
             'requestForm' => $form,
+            'setting' => $this->settingRepository->find(1)
         ]);
     }
 

@@ -4,6 +4,7 @@ namespace App\Controller\Admin\Home;
 
 use App\Repository\ContactRepository;
 use App\Repository\CourtRepository;
+use App\Repository\SettingRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,14 +17,15 @@ class HomeController extends AbstractController
     public function index(
         CourtRepository $courtRepository,
         ContactRepository $contactRepository,
-        UserRepository $userRepository
-
+        UserRepository $userRepository,
+        SettingRepository $settingRepository
     ): Response
     {
         return $this->render('pages/admin/home/index.html.twig', [
             "courts" => $courtRepository->findAll(),
             "contacts" => $contactRepository->findAll(),
-            "users" => $userRepository->findAll()
+            "users" => $userRepository->findAll(),
+            "setting" => $settingRepository->find(1)
         ]);
     }
 }

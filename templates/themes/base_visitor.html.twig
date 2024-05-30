@@ -15,6 +15,9 @@
         <meta name="author" content="Quentin Martens">
         <meta name="publisher" content="Quentin Martens">
 
+        {# Font Awesome #}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
         {# Font Familly #}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,9 +69,15 @@
                     <div class="d-flex align-items-end">
                         {% if app.user and is_granted('ROLE_ADMIN') %}
                             <a class="pe-3" href="{{path('admin_home')}}"><img src="/logos/cadenas.png" width="40" alt=""></a>
+                            <a class="pe-4" href="#"><img src="/logos/utilisateur.png" width="40" alt=""></a>
+                            <a href="{{path('user_booking_index')}}"><img src="/logos/reservation_bleu.png" width="50" alt=""></a>
+                        {% elseif app.user and is_granted('ROLE_USER') %}
+                            <a class="pe-4" href="#"><img src="/logos/utilisateur.png" width="40" alt=""></a>
+                            <a href="{{path('user_booking_index')}}"><img src="/logos/reservation_bleu.png" width="50" alt=""></a>
+                        {% else %}
+                            <a class="pe-4" href="{{path('visitor_authentication_login')}}"><img src="/logos/utilisateur.png" width="40" alt=""></a>
+                            <a href="{{path('visitor_authentication_login')}}"><img src="/logos/reservation_bleu.png" width="50" alt=""></a>
                         {% endif %}
-                        <a class="pe-4" href="{{path('visitor_authentication_login')}}"><img src="/logos/utilisateur.png" width="40" alt=""></a>
-                        <a href="{{path('user_booking_index')}}"><img src="/logos/reservation_bleu.png" width="50" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -86,7 +95,33 @@
                 <a href="{{path('visitor_home_index')}}"><img class="me-3" width="110" src="/logos/Padeltime.png"alt="Logo"></a>
 
                 <!-- Mentions legales -->
-                <a href="#">Mentions légales</a>
+                <button type="button" class="btn text-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Mentions légales</button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Mentions légales</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut mi tempor, rhoncus sapien a, elementum dolor. Vestibulum vulputate massa eu scelerisque bibendum. Vestibulum sit amet ultricies enim, interdum consectetur quam. Praesent vitae efficitur urna, at egestas urna. Nulla id arcu ligula. Cras gravida, massa nec congue posuere, turpis nibh faucibus mi, eget molestie nibh sem id enim. Maecenas tincidunt at nulla non sodales. In eu viverra lectus. Duis nec ex ac lorem sagittis facilisis et vitae lacus. Sed quam libero, volutpat eu porttitor vel, tincidunt et massa. Nunc pulvinar fermentum leo, nec volutpat sem eleifend sit amet. Phasellus a quam pellentesque, condimentum tortor non, gravida nulla. Nullam bibendum est sit amet nisi congue, ultrices luctus risus tempor. Nulla ac tortor dignissim, pellentesque lectus ut, venenatis mi. Aliquam volutpat quam nec ipsum condimentum ullamcorper. Quisque porta arcu ligula, vel malesuada neque faucibus ac.</p>
+
+                                <p>Mauris faucibus nisi eget volutpat pellentesque. Nulla facilisis justo leo, vel sollicitudin lectus tempor vitae. Fusce ultricies vitae metus eget rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam quis tristique augue, vitae sollicitudin velit. Vivamus id ipsum tempus, interdum nulla eu, rhoncus arcu. Fusce mollis odio et odio pellentesque convallis. Proin varius lectus eu felis consectetur, ut tempor nisl condimentum.</p>
+
+                                <p>Nulla et dui ut mi condimentum maximus vel eget mi. In vestibulum pellentesque elit. Ut dignissim ligula at imperdiet euismod. Integer nibh tortor, laoreet a eros et, aliquam lobortis dui. Ut malesuada euismod augue ac gravida. Aenean placerat finibus vehicula. Suspendisse rhoncus elit in odio iaculis vulputate.</p>
+
+                                <p>Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris at rhoncus massa, vitae tincidunt dui. In sit amet magna lectus. Etiam in erat nulla. Nunc maximus dolor sit amet libero porta, ullamcorper auctor magna facilisis. Duis efficitur, felis a feugiat malesuada, dolor nisi rutrum nisl, ac dapibus tortor lorem scelerisque mauris. Aenean blandit lacus eu quam condimentum ullamcorper.</p>
+
+                                <p>Duis nibh dui, convallis non aliquam sed, feugiat eget lorem. Sed dui ante, posuere et finibus vel, semper eleifend sem. Etiam pharetra tincidunt libero, id consequat ex molestie venenatis. Aliquam in iaculis turpis. Nam dui erat, congue a ornare ac, tristique ut arcu. Mauris at molestie turpis. Aliquam ut porta risus. Pellentesque non semper nulla. Fusce tortor turpis, tempor in leo ac, feugiat fermentum eros.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="d-flex flex-column align-items-center justify-content-around flex-md-row">
@@ -94,17 +129,17 @@
                 <div class="d-flex flex-column my-3 me-lg-5">
                     <p>Suivez-nous sur les réseaux sociaux</p>
                     <div class="d-flex justify-content-evenly align-items-center">
-                        <a href="https://www.facebook.com" target="_blank"><img class="img-fluid" width="30" src="/logos/facebook.png"alt="Logo"></a>
-                        <a href="https://www.instagram.com" target="_blank"><img class="img-fluid" width="30" src="/logos/instagram.png"alt="Logo"></a>
-                        <a href="https://www.twitter.com" target="_blank"><img class="img-fluid" width="30" src="/logos/twitter.png"alt="Logo"></a>
-                        <a href="https://www.linkedin.com" target="_blank"><img class="img-fluid" width="40" src="/logos/linkedin.png"alt="Logo"></a>
+                        <a href="{{setting.facebookLink}}" target="_blank"><img class="img-fluid" width="30" src="/logos/facebook.png"alt="Logo"></a>
+                        <a href="{{setting.instagramLink}}" target="_blank"><img class="img-fluid" width="35" src="/logos/instagram.png"alt="Logo"></a>
+                        <a href="{{setting.tiktokLink}}" target="_blank"><img class="img-fluid" width="50" src="/logos/tiktok.png"alt="Logo"></a>
+                        <a href="{{setting.linkedinLink}}" target="_blank"><img class="img-fluid" width="40" src="/logos/linkedin.png"alt="Logo"></a>
                     </div>
                 </div>
 
                 <!-- Tel/Mail -->
                 <div class="text-center">
-                    <p>06.33.47.49.60</p>
-                    <p>quentin.martens@orange.fr</p>
+                    <p>{{setting.phone}}</p>
+                    <p>{{setting.email}}</p>
                 </div>
             </div>
         </section>
