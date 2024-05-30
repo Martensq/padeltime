@@ -2,8 +2,12 @@
 
 namespace App\Controller\Admin\User;
 
+use App\Entity\User;
+use DateTimeImmutable;
 use App\Repository\UserRepository;
+use App\Form\EditUserRolesFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,59 +15,52 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/admin')]
 class UserController extends AbstractController
 {
-    
-    public function __construct(
-        private EntityManagerInterface $em,
-        private UserRepository $userRepository
-    )
-    {
-    }
-
     #[Route('/user/list', name: 'admin_user_index', methods: ['GET'])]
-    public function index(): Response
+    public function index(UserRepository $userRepository): Response
     {
+        $users = $userRepository->findAll();
+
         return $this->render('pages/admin/user/index.html.twig', [
-            "users" => $this->userRepository->findAll()
+            "users" => $users
         ]);
     }
 
-    // #[Route('/user/{id<\d+>}/edit', name: 'admin_user_edit', methods: ['GET', 'POST'])]
-    // public function edit(User $user, Request $request): Response
-    // {    
-    //     $form = $this->createForm(AdminUserFormType::class, $user);
+    #[Route('/user/{id<\d+>}/edit/roles', name: 'admin_user_edit_roles', methods: ['GET', 'POST'])]
+    public function editRoles(User $user, Request $request, EntityManagerInterface $em): Response
+    {    
+        $form = $this->createForm(EditUserRolesFormType::class, $user);
 
-    //     $form->handleRequest($request);
+        $form->handleRequest($request);
         
-    //     if ($form->isSubmitted() && $form->isValid())
-    //     {
-    //         $user->setUpdatedAt(new DateTimeImmutable());
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $user->setUpdatedAt(new DateTimeImmutable());
 
-    //         $this->em->persist($user);
-    //         $this->em->flush();
+            $em->persist($user);
+            $em->flush();
 
-    //         $this->addFlash("success", "Le numéro du user a été modifié");
+            $this->addFlash("success", "Les rôles de {$user->getFirstName()} {$user->getLastName()} ont été modifié");
 
-    //         return $this->redirectToRoute("admin_user_index");
-    //     }
+            return $this->redirectToRoute("admin_user_index");
+        }
 
-    //     return $this->render("pages/admin/user/edit.html.twig", [
-    //         'user' => $user,
-    //         'form' => $form->createView()
-    //     ]);
-    // }
+        return $this->render("pages/admin/user/edit_roles.html.twig", [
+            'form' => $form->createView()
+        ]);
+    }
 
-    // #[Route('/court/{id<\d+>}/delete}', name: 'admin_court_delete', methods: ['POST'])]
-    // public function delete(Court $court, Request $request): Response
-    // {
-    //     if ($this->isCsrfTokenValid('delete_court_'.$court->getId(), $request->request->get('_csrf_token')))
-    //     {
-    //         $this->addFlash('success', "La piste {$court->getCourtNumber()} a été supprimée");
+    #[Route('/user/{id<\d+>}/delete}', name: 'admin_user_delete', methods: ['POST'])]
+    public function delete(User $user, Request $request, EntityManagerInterface $em): Response
+    {
+        if ($this->isCsrfTokenValid('delete_user_'.$user->getId(), $request->request->get('_csrf_token')))
+        {
+            $this->addFlash('success', "L'utilisateur' {$user->getFirstName()} {$user->getLastName()} a été supprimé");
             
-    //         $this->em->remove($court);
-    //         $this->em->flush();
-    //     }
+            $em->remove($user);
+            $em->flush();
+        }
 
-    //     return $this->redirectToRoute("admin_court_index");
-    // }
+        return $this->redirectToRoute("admin_user_index");
+    }
 
 }

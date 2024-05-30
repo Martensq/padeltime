@@ -6,13 +6,31 @@
 
 {% block keywords %}Liste, contact, admin{% endblock %}
 
+{% block jQuery %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block dataTables %}
+    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.7/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/bs5/dt-2.0.7/datatables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+                language: {
+                    url: 'https:////cdn.datatables.net/plug-ins/2.0.7/i18n/fr-FR.json',
+                },
+            });
+        } );
+    </script>
+{% endblock %}
+
 {% block main %}
     <h1 class="text-center my-3 display-5">Liste des contacts</h1>
 
     {% include 'components/_alert.html.twig' %}
 
     <div class="table-responsive">
-        <table class="table table-striped table-hover text-center table-bordered">
+        <table id="myTable" class="table table-striped table-hover text-center table-bordered">
             <thead class="table-dark">
                 <tr>
                     <th>Id</th>
