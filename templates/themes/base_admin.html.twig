@@ -209,26 +209,26 @@
                                     Utilisateurs
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_setting_index')}}">
+                                    <i class="fa-solid fa-gear"></i>
+                                    Paramètres
+                                </a>
+                            </li>
                         </ul>
 
                     <hr class="my-3">
 
                     <ul class="nav flex-column mb-auto">
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 text-dark" href="#">
-                                <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg>
-                                Gestion du profil
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 text-dark" href="">
-                                <i class="fa-solid fa-gear"></i>
-                                Paramètres du site
+                            <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('visitor_home_index')}}">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                Retour au site
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('app_logout')}}">
-                                <svg class="bi"><use xlink:href="#door-closed"/></svg>
+                                <i class="fa-solid fa-right-from-bracket"></i>
                                 Déconnexion
                             </a>
                         </li>

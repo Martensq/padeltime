@@ -1,0 +1,69 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %}Les paramètres du site{% endblock %}
+
+{% block description %}Les paramètres du site{% endblock %}
+
+{% block keywords %}Paramètres, admin{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Les paramètres du site</h1>
+
+    {% include 'components/_alert.html.twig' %}
+
+    <div class="table-responsive mt-5">
+        <table class="table table-striped table-hover text-center table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nom du club</th>
+                    <th>Tarifs</th>
+                    <th>Horaires</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Adresse</th>
+                    <th>Liens</th>
+                    <th>Créé le</th>
+                    <th>Modifié le</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{setting.clubName}}</td>
+                    <td>
+                        <p>Heures pleines :</p>
+                        <p><strong>{{setting.peakHoursPrice}}€</strong></p>
+                        <p>Heures creuses :</p>
+                        <p><strong>{{setting.offPeakHoursPrice}}€</strong></p>
+                        <p>Location raquette :</p>
+                        <p><strong>{{setting.racketRentalPrice}}€</strong></p>
+                        <p>Achat balles :</p>
+                        <p><strong>{{setting.ballPrice}}€</strong></p>
+                    </td>
+                    <td>
+                        <p>Semaine et jours feriés :</p>
+                        <p><strong>{{setting.weekOpeningHours}}</strong></p>
+                        <p>Week-end :</p>
+                        <p><strong>{{setting.weekEndOpeningHours}}</strong></p>
+                    </td>
+                    <td>{{setting.email}}</td>
+                    <td>{{setting.phone}}</td>
+                    <td>{{setting.address}}</td>
+                    <td>
+                        <p>Lien Google Maps</p>
+                        <p>Lien Linkedin</p>
+                        <p>Lien Facebook</p>
+                        <p>Lien Instagram</p>
+                        <p>Lien Tiktok</p>
+                    </td>
+                    <td>{{setting.createdAt|format_date()}}</td>
+                    <td>{{setting.updatedAt|format_date()}}</td>
+                    <td>
+                        <a class="mx-2 text-secondary" href="{{path('admin_setting_edit', {'id': setting.id})}}"><i class="fas fa-edit"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
