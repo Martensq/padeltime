@@ -1,0 +1,94 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %}Modification des paramètres{% endblock %}
+
+{% block description %}Modification des paramètres{% endblock %}
+
+{% block keywords %}Modifications, Paramètres, admin{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Modification des paramètres</h1>
+    
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                {{ form_start(form) }}
+                    <div class="mb-3">
+                        <label for="setting_form_clubName">Nom du club</label>
+                        {{form_widget(form.clubName, {'attr': {'class': 'form-control'}})}}
+                        <div class="text-danger">{{ form_errors(form.clubName) }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="setting_form_peakHoursPrice">Prix heures pleines</label>
+                        {{form_widget(form.peakHoursPrice, {'attr': {'class': 'form-control'}})}}
+                        <div class="text-danger">{{ form_errors(form.peakHoursPrice) }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="setting_form_offPeakHoursPrice">Prix heures creuses</label>
+                        {{form_widget(form.offPeakHoursPrice, {'attr': {'class': 'form-control'}})}}
+                        <div class="text-danger">{{ form_errors(form.offPeakHoursPrice) }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="setting_form_racketRentalPrice">Prix location raquette</label>
+                        {{form_widget(form.racketRentalPrice, {'attr': {'class': 'form-control'}})}}
+                        <div class="text-danger">{{ form_errors(form.racketRentalPrice) }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="setting_form_ballPrice">Prix achat balles</label>
+                        {{form_widget(form.ballPrice, {'attr': {'class': 'form-control'}})}}
+                        <div class="text-danger">{{ form_errors(form.ballPrice) }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="setting_form_weekOpeningHours">Horaires ouverture semaine et jours fériés</label>
+                        {{form_widget(form.weekOpeningHours, {'attr': {'class': 'form-control'}})}}
+                        <div class="text-danger">{{ form_errors(form.weekOpeningHours) }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="setting_form_weekEndOpeningHours">Horaires ouverture week-end</label>
+                        {{form_widget(form.weekEndOpeningHours, {'attr': {'class': 'form-control'}})}}
+                        <div class="text-danger">{{ form_errors(form.weekEndOpeningHours) }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="setting_form_email">Email</label>
+                        {{form_widget(form.email, {'attr': {'class': 'form-control'}})}}
+                        <div class="text-danger">{{ form_errors(form.email) }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="setting_form_phone">Numéro de téléphone</label>
+                        {{form_widget(form.phone, {'attr': {'class': 'form-control'}})}}
+                        <div class="text-danger">{{ form_errors(form.phone) }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="setting_form_address">Adresse</label>
+                        {{form_widget(form.address, {'attr': {'class': 'form-control'}})}}
+                        <div class="text-danger">{{ form_errors(form.address) }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="setting_form_mapLink">Lien Google Maps</label>
+                        {{form_widget(form.mapLink, {'attr': {'class': 'form-control'}})}}
+                        <div class="text-danger">{{ form_errors(form.mapLink) }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="setting_form_linkedinLink">Lien Linkedin</label>
+                        {{form_widget(form.linkedinLink, {'attr': {'class': 'form-control'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="setting_form_facebookLink">Lien Facebook</label>
+                        {{form_widget(form.facebookLink, {'attr': {'class': 'form-control'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="setting_form_instagramLink">Lien Instagram</label>
+                        {{form_widget(form.instagramLink, {'attr': {'class': 'form-control'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="setting_form_tiktokLink">Lien Tiktok</label>
+                        {{form_widget(form.tiktokLink, {'attr': {'class': 'form-control'}})}}
+                    </div>
+                    <div>
+                        <input formnovalidate type="submit" class="btn btn-primary" value="Modifier">
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
