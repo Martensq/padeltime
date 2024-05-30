@@ -12,7 +12,7 @@
 
     <section class="container-fluid img_accueil d-flex justify-content-center align-items-center">
         <div class="d-flex h-75 flex-column align-items-center justify-content-between">
-            <h1 class="text-white text_size_xl">PADEL TIME</h1>
+            <h1 class="text-white text_size_xl">{{setting.clubName|upper}}</h1>
             <a class="btn btn-primary btn-lg btn_resa text-white" href="{{path('user_booking_index')}}">Réservez un terrain</a>
         </div>
     </section>
@@ -104,7 +104,7 @@
 
                 <!-- Map -->
                 <div class="col-lg-6">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4422.119655573427!2d2.50093447991292!3d48.774099089329695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e60d632186a0c1%3A0x20594726f144f0e4!2sPadel-Horizon!5e0!3m2!1sfr!2sfr!4v1712687305491!5m2!1sfr!2sfr" class="d-none d-md-block me-2" width="550" height="550" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="{{setting.mapLink}}" class="d-none d-md-block me-2" width="550" height="550" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
 

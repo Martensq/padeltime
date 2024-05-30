@@ -21,7 +21,7 @@
 
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-8 col-lg-4 mx-auto">
+                        <div class="col-md-8 col-lg-4 mx-auto mb-5">
                             {{ form_start(form) }}
                                 <div class="mb-3">
                                     <label for="contact_form_firstName">Prénom <span class="text-danger">*</span></label>
@@ -60,20 +60,20 @@
                 <div class="d-flex flex-column align-items-center flex-md-row justify-content-md-evenly pb-5">
                     <div class="ms-md-5">
                         <img src="/logos/tel.png" class="mb-2" width="50" alt="">
-                        <p class="text_size_m">06.33.47.49.60</p>
+                        <p class="text_size_m">{{setting.phone}}</p>
                     </div>
                     <div>
                         <img src="/logos/mail.png" class="mb-2" width="50" alt="">
-                        <p class="text_size_m">quentin.martens@orange.fr</p>
+                        <p class="text_size_m">{{setting.email}}</p>
                     </div>
                 </div>
             </section>
 
             <section class="d-flex flex-column align-items-center">
                 <h2 class="text_size_l">Nous trouver</h1>
-                <iframe class="my-5 d-md-none d-lg-none" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4422.119655573427!2d2.50093447991292!3d48.774099089329695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e60d632186a0c1%3A0x20594726f144f0e4!2sPadel-Horizon!5e0!3m2!1sfr!2sfr!4v1712687305491!5m2!1sfr!2sfr" width="350" height="200" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                <iframe class="my-5 d-none d-md-block d-lg-none" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4422.119655573427!2d2.50093447991292!3d48.774099089329695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e60d632186a0c1%3A0x20594726f144f0e4!2sPadel-Horizon!5e0!3m2!1sfr!2sfr!4v1712687305491!5m2!1sfr!2sfr" width="650" height="400" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                <iframe class="my-5 d-none d-md-none d-lg-block" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4422.119655573427!2d2.50093447991292!3d48.774099089329695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e60d632186a0c1%3A0x20594726f144f0e4!2sPadel-Horizon!5e0!3m2!1sfr!2sfr!4v1712687305491!5m2!1sfr!2sfr" width="900" height="525" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe class="my-5 d-md-none d-lg-none" src="{{setting.mapLink}}" width="350" height="200" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe class="my-5 d-none d-md-block d-lg-none" src="{{setting.mapLink}}" width="650" height="400" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe class="my-5 d-none d-md-none d-lg-block" src="{{setting.mapLink}}" width="900" height="525" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </section>
         </div>
     </div>

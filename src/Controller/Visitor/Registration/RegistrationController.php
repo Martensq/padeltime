@@ -6,6 +6,7 @@ namespace App\Controller\Visitor\Registration;
 use App\Entity\User;
 use App\Security\EmailVerifier;
 use App\Form\RegistrationFormType;
+use App\Repository\SettingRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\Mime\Address;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,7 +26,12 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/inscription', name: 'visitor_registration_register', methods: ['GET', 'POST'])]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(
+        Request $request,
+        UserPasswordHasherInterface $userPasswordHasher,
+        EntityManagerInterface $entityManager,
+        SettingRepository $settingRepository
+    ): Response
     {
         // Si l'utilisateur est déjà connecté
             // il n'a plus rien à faire sur le page de connexion
@@ -75,14 +81,17 @@ class RegistrationController extends AbstractController
         // 3- Passer le formulaire à la page pour affichage
         return $this->render('pages/visitor/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'setting' => $settingRepository->find(1)
         ]);
     }
 
 
     #[Route('inscription/email-en-attente-de-validation', name: 'visitor_registration_waiting_for_email_verification', methods: ['GET'])]
-    public function waitingForEmailVerification(): Response
+    public function waitingForEmailVerification(SettingRepository $settingRepository): Response
     {
-       return  $this->render('pages/visitor/registration/waiting_for_email_verification.html.twig');
+        return  $this->render('pages/visitor/registration/waiting_for_email_verification.html.twig', [
+            'setting' => $settingRepository->find(1)
+        ]);
     }
 
 

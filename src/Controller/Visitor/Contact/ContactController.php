@@ -5,6 +5,7 @@ namespace App\Controller\Visitor\Contact;
 use DateTimeImmutable;
 use App\Entity\Contact;
 use App\Form\ContactFormType;
+use App\Repository\SettingRepository;
 use App\Service\SendEmailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +16,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'visitor_contact_index', methods: ['GET', 'POST'])]
-    public function index(Request $request, EntityManagerInterface $entityManager, SendEmailService $sendEmailService): Response
+    public function index(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        SendEmailService $sendEmailService,
+        SettingRepository $settingRepository
+    ): Response
     {
         // 1- Créons l'instance du contact qui doit être ajouté en bdd
         $contact = new Contact();
@@ -66,7 +72,8 @@ class ContactController extends AbstractController
 
         // 3- Passons la partie visible du formulaire à la page (vue) pour affichage
         return $this->render("pages/visitor/contact/index.html.twig", [
-            "form"=> $form->createView()
+            "form" => $form->createView(),
+            "setting" => $settingRepository->find(1)
         ]);
     }
 
