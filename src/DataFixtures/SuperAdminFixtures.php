@@ -39,6 +39,7 @@ class SuperAdminFixtures extends Fixture
                     ->setFirstName("Quentin")
                     ->setLastName("Martens")
                     ->setEmail("quentin.martens@orange.fr")
+                    ->setPhone("0633474960")
                     ->setRoles(['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_USER'])
                     ->setPassword($passwordHashed)
                     ->setVerified(true)

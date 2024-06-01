@@ -25,7 +25,7 @@ class HomeController extends AbstractController
             "courts" => $courtRepository->findAll(),
             "contacts" => $contactRepository->findAll(),
             "users" => $userRepository->findAll(),
-            "setting" => $settingRepository->find(1)
+            "setting" => $settingRepository->find(4)
         ]);
     }
 }

@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Controller\Visitor\LePadel;
+namespace App\Controller\Visitor\MyProfile;
 
 use App\Repository\SettingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class LePadelController extends AbstractController
+class MyProfileController extends AbstractController
 {
-    #[Route('/le-padel', name: 'visitor_lePadel_index', methods: ['GET'])]
+    #[Route('/my-profile', name: 'visitor_myProfile_index')]
     public function index(SettingRepository $settingRepository): Response
     {
-        return $this->render('pages/visitor/le_padel/index.html.twig', [
+        return $this->render('pages/visitor/my_profile/index.html.twig', [
             'setting' => $settingRepository->find(4)
         ]);
     }

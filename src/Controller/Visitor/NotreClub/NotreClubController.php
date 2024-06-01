@@ -13,7 +13,7 @@ class NotreClubController extends AbstractController
     public function index(SettingRepository $settingRepository): Response
     {
         return $this->render('pages/visitor/notre_club/index.html.twig', [
-            "setting" => $settingRepository->find(1)
+            "setting" => $settingRepository->find(4)
         ]);
     }
 }
