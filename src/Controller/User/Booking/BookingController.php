@@ -24,7 +24,7 @@ class BookingController extends AbstractController
 
         return $this->render('pages/user/booking/index.html.twig', [
             'days' => $nextFourteenDays,
-            'setting' => $settingRepository->find(1)
+            'setting' => $settingRepository->find(4)
         ]);
     }
 }

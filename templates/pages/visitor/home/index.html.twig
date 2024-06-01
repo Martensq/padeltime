@@ -10,9 +10,12 @@
 
     <!-- PADEL TIME - IMG et BTN -->
 
-    <section class="container-fluid img_accueil d-flex justify-content-center align-items-center">
-        <div class="d-flex h-75 flex-column align-items-center justify-content-between">
-            <h1 class="text-white text_size_xl">{{setting.clubName|upper}}</h1>
+    <section class="container-fluid img_accueil d-flex align-items-center text-center">
+        <div class="container-fluid d-flex flex-column justify-content-around align-items-center bg-dark bg-opacity-25 h-100">
+            <div class="d-flex flex-column align-items-center">
+                <h1 class="text-white text_size_xl">Bienvenue chez {{setting.clubName|upper}}</h1>
+                <h2 class="text-white text_size_l">Club de padel en ile de france</h2>
+            </div>
             <a class="btn btn-primary btn-lg btn_resa text-white" href="{{path('user_booking_index')}}">Réservez un terrain</a>
         </div>
     </section>
@@ -20,26 +23,26 @@
 
     <!-- Caractéristiques -->
 
-    <section class="grey2 py-5 text_size_m shadow">   
-        <div class="container">
+    <section class="grey2 py-5 shadow text_size_l text-center">
+        <div class="container pt-4">
             <div class="d-flex flex-column align-items-center flex-md-row justify-content-md-around">
-                <div class="d-flex flex-column align-items-center mb-5 flex-lg-row">
-                    <img width="100" src="/logos/stars.png" alt="">
-                    <p class="text_yellow">Terrains dernière génération</p>
+                <div class="d-flex flex-column align-items-center mb-5 me-md-5 me-lg-0 flex-lg-row">
+                    <i class="fa-solid fa-medal fa-xl text_yellow pb-4 pb-lg-0 pe-lg-2"></i>
+                    <p class="text_yellow text_size_m">Terrains dernière génération</p>
                 </div>
-                <div class="d-flex flex-column-reverse align-items-center mb-5 flex-lg-row">
-                    <p class="text_yellow">8M hauteur sous plafond</p>
-                    <img width="100" src="/logos/arrow.png" alt="">
+                <div class="d-flex flex-column-reverse align-items-center my-5 ms-md-5 ms-lg-0 mt-md-0 flex-lg-row">
+                    <p class="text_yellow text_size_m">8M hauteur sous plafond</p>
+                    <i class="fa-solid fa-up-right-and-down-left-from-center fa-rotate-by fa-xl text_yellow pb-4 ps-4 pb-lg-0 ps-lg-2" style="--fa-rotate-angle: -45deg;"></i>
                 </div>
             </div>
             <div class="d-flex flex-column align-items-center flex-md-row justify-content-md-around align-items-md-start">
-                <div class="d-flex flex-column align-items-center mb-5 me-md-4 flex-lg-row mb-lg-0">
-                    <img width="100" src="/logos/temperature.png" alt="">
-                    <p class="text_yellow ms-md-2">Isolation normes RT 2012</p>
+                <div class="d-flex flex-column align-items-center my-5 me-md-5 mb-md-0 me-lg-0 flex-lg-row">
+                    <i class="fa-solid fa-temperature-three-quarters fa-xl text_yellow pb-4 pb-lg-0 pe-lg-2"></i>
+                    <p class="text_yellow ms-md-2 text_size_m">Isolation normes RT 2012</p>
                 </div>
-                <div class="d-flex flex-column-reverse align-items-center me-md-4 flex-lg-row">
-                    <p class="text_yellow">Espace bar</p>
-                    <img width="100" src="/logos/beer.png" alt="">
+                <div class="d-flex flex-column-reverse align-items-center mt-5 me-md-5 flex-lg-row">
+                    <p class="text_yellow text_size_m">Espace bar</p>
+                    <i class="fa-solid fa-champagne-glasses fa-xl text_yellow pb-4 pb-lg-0 ps-lg-2"></i>
                 </div>
             </div>
         </div>   
@@ -49,19 +52,19 @@
     <!-- L'équipe -->
 
     <section class="text-center pb-5">
-        <h2 class="pt-4 pb-5 text_size_l">L'équipe</h2>
+        <h2 class="py-5 text_size_l">L'équipe</h2>
         <div class="container d-flex flex-column align-items-center flex-md-row justify-content-md-around">
             <article class="d-flex flex-column align-items-center">
                 <img class="pb-3 w-75" src="/images/membre_femme2.jpg" alt="Isabelle, membre du club">
                 <h3 class="pb-3 text_size_m">Isabelle</h3>
-                <p class="w-75 text_size_s">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio quos laboriosam distinctio ullam
+                <p class="w-75 text_size_xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio quos laboriosam distinctio ullam
                     beatae, fugit velit, error maxime cupiditate earum debitis provident voluptate nam quia magnam. Odio
                     corporis quidem officiis.</p>
             </article>
             <article class="d-flex flex-column align-items-center">
-                <img class="pb-3 w-75" src="/images/membres_hommes.jpeg" alt="Christian et José, membres du club">
+                <img class="pb-3 w_80" src="/images/membres_hommes.jpeg" alt="Christian et José, membres du club">
                 <h3 class="pb-3 text_size_m">Christian et José</h3>
-                <p class="w-75 text_size_s">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias laborum magnam itaque quas
+                <p class="w-75 text_size_xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias laborum magnam itaque quas
                     perferendis animi, deleniti nesciunt necessitatibus asperiores hic recusandae atque quos praesentium
                     accusamus aspernatur quam? Cumque, non hic!</p>
             </article>
@@ -70,26 +73,28 @@
 
 
     <!-- Icones/liens -->
-
-    <section class="grey2">
-        <div class="text_size_m py-5 container d-flex flex-column flex-md-row justify-content-md-around">
-            <div class="text-center mb-5 mb-md-0">
-                <a class="text-decoration-none text_yellow" href="{{path('visitor_lePadel_index')}}#regles">
-                    <img width="100" class="mb-1" src="/logos/book.png" alt="">
-                    <p>Règles et niveaux</p>
-                </a>
-            </div>
-            <div class="text-center mb-5 mb-md-0">
-                <a class="text-decoration-none text_yellow" href="{{path('visitor_notreClub_index')}}">
-                    <img width="100" class="mb-1" src="/logos/euro.png" alt="">
-                    <p>Tarifs et horaires</p>
-                </a>
-            </div>
-            <div class="text-center">
-                <a class="text-decoration-none text_yellow" href="{{path('user_booking_index')}}">
-                    <img width="100" class="mb-1" src="/logos/reservation_jaune.png" alt="">
-                    <p>Réservation
-                </a>
+    
+    <section class="grey2 py-5">
+        <div class="container text_size_m pt-3 pb-1">
+            <div class="row d-flex justify-content-between">
+                <div class="col-md-3 text-center mb-5 mb-md-0">
+                    <a class="text-decoration-none text_yellow" href="{{path('visitor_lePadel_index')}}#regles">
+                        <i class="fa-solid fa-scale-balanced fa-2xl mb-4"></i>
+                        <p>Règles et niveaux</p>
+                    </a>
+                </div>
+                <div class="col-md-3 text-center mb-5 mb-md-0">
+                    <a class="text-decoration-none text_yellow" href="{{path('visitor_notreClub_index')}}">
+                        <i class="fa-solid fa-euro-sign fa-2xl mb-4"></i>
+                        <p>Tarifs et horaires</p>
+                    </a>
+                </div>
+                <div class="col-md-3 text-center">
+                    <a class="text-decoration-none text_yellow" href="{{path('user_booking_index')}}">
+                        <i class="fa-regular fa-calendar-check fa-2xl mb-4"></i>
+                        <p>Réservation</p>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -98,44 +103,44 @@
     <!-- Map et Form -->
 
     <section id="contact" class="text-center grey1">
-        <div class="py-4 container">
+        <div class="py-5 container">
             {% include 'components/_alert.html.twig' %}
             <div class="row">
 
                 <!-- Map -->
-                <div class="col-lg-6">
-                    <iframe src="{{setting.mapLink}}" class="d-none d-md-block me-2" width="550" height="550" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="col-lg-6 me-5 mb-md-5 mb-lg-0">
+                    <iframe src="{{setting.mapLink}}" class="d-none d-md-block" width="550" height="550" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
 
                 <!-- Form -->
 
-                <div class="col-lg-4 mx-auto text-white">
+                <div class="col-8 col-lg-4 mx-auto text-white">
                     <h3 class="text_size_l pb-4">Nous contacter</h3>
 
                     {{ form_start(form) }}
                         <div class="mb-3">
-                            <label for="contact_form_firstName">Prénom <span class="text-danger">*</span></label>
+                            <label for="contact_form_firstName">Prénom</span></label>
                             {{ form_widget(form.firstName, {'attr': {'class':'form-control'}}) }}
                             <div class="text-danger">{{ form_errors(form.firstName) }}</div>
                         </div>
                         <div class="mb-3">
-                            <label for="contact_form_lastName">Nom <span class="text-danger">*</span></label>
+                            <label for="contact_form_lastName">Nom</span></label>
                             {{ form_widget(form.lastName, {'attr': {'class':'form-control'}}) }}
                             <div class="text-danger">{{ form_errors(form.lastName) }}</div>
                         </div>
                         <div class="mb-3">
-                            <label for="contact_form_email">Email <span class="text-danger">*</span></label>
+                            <label for="contact_form_email">Email</span></label>
                             {{ form_widget(form.email, {'attr': {'class':'form-control'}}) }}
                             <div class="text-danger">{{ form_errors(form.email) }}</div>
                         </div>
                         <div class="mb-3">
-                            <label for="contact_form_phone">Phone <span class="text-danger">*</span></label>
+                            <label for="contact_form_phone">Phone</span></label>
                             {{ form_widget(form.phone, {'attr': {'class':'form-control'}}) }}
                             <div class="text-danger">{{ form_errors(form.phone) }}</div>
                         </div>
                         <div class="mb-3">
-                            <label for="contact_form_message">Commentaire <span class="text-danger">*</span></label>
+                            <label for="contact_form_message">Commentaire</span></label>
                             {{ form_widget(form.message, {'attr': {'class':'form-control'}}) }}
                             <div class="text-danger">{{ form_errors(form.message) }}</div>
                         </div>

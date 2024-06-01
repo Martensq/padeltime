@@ -29,7 +29,7 @@ class HomeController extends AbstractController
         
         return $this->render('pages/visitor/home/index.html.twig', [
             "form" => $form->createView(),
-            "setting" => $settingRepository->find(1)
+            "setting" => $settingRepository->find(4)
         ]);
     }
 }

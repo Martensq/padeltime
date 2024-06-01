@@ -81,7 +81,7 @@ class RegistrationController extends AbstractController
         // 3- Passer le formulaire à la page pour affichage
         return $this->render('pages/visitor/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
-            'setting' => $settingRepository->find(1)
+            'setting' => $settingRepository->find(4)
         ]);
     }
 
@@ -90,7 +90,7 @@ class RegistrationController extends AbstractController
     public function waitingForEmailVerification(SettingRepository $settingRepository): Response
     {
         return  $this->render('pages/visitor/registration/waiting_for_email_verification.html.twig', [
-            'setting' => $settingRepository->find(1)
+            'setting' => $settingRepository->find(4)
         ]);
     }
 

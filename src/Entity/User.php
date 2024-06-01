@@ -58,6 +58,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
+    #[Assert\NotBlank(message: "Le numéro de téléphone est obligatoire")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: "Le numéro de téléphone doit contenir au maximum {{ limit }} caractères.",
+    )]
+    #[Assert\Regex(
+        "/^[0-9\s\-\(\)\+]{6,60}$/",
+        message: "Le numéro de téléphone n'est pas valide."
+    )]
+    #[ORM\Column(length: 255)]
+    private ?string $phone = null;
 
     /**
      * @var list<string> The user roles
@@ -110,6 +121,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+    
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): static
+    {
+        $this->phone = $phone;
 
         return $this;
     }

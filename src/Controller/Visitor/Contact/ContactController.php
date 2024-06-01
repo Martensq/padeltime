@@ -73,7 +73,7 @@ class ContactController extends AbstractController
         // 3- Passons la partie visible du formulaire à la page (vue) pour affichage
         return $this->render("pages/visitor/contact/index.html.twig", [
             "form" => $form->createView(),
-            "setting" => $settingRepository->find(1)
+            "setting" => $settingRepository->find(4)
         ]);
     }
 

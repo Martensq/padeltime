@@ -22,29 +22,34 @@
                     {{form_start(registrationForm)}}
                         <div class="row">
                             <div class="mb-3 col-md-6">
-                                <label for="registration_form_firstName">Prénom <span class="text-danger">*</span></label>
+                                <label for="registration_form_firstName">Prénom</label>
                                 {{form_widget(registrationForm.firstName, {'attr': {'class':'form-control', 'autofocus':'autofocus'}})}}
                                 <div class="text-danger">{{form_errors(registrationForm.firstName)}}</div>
                             </div>
                             <div class="mb-3 col-md-6">
-                                <label for="registration_form_lastName">Nom <span class="text-danger">*</span></label>
+                                <label for="registration_form_lastName">Nom</label>
                                 {{form_widget(registrationForm.lastName, {'attr': {'class':'form-control'}})}}
                                 <div class="text-danger">{{form_errors(registrationForm.lastName)}}</div>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="registration_form_email">Email <span class="text-danger">*</span></label>
+                            <label for="registration_form_email">Email</label>
                             {{form_widget(registrationForm.email, {'attr': {'class':'form-control'}})}}
                             <div class="text-danger">{{form_errors(registrationForm.email)}}</div>
                         </div>
                         <div class="mb-3">
-                            <label for="registration_form_password_first">Mot de passe <span class="text-danger">*</span></label>
+                            <label for="registration_form_phone">Téléphone</label>
+                            {{form_widget(registrationForm.phone, {'attr': {'class':'form-control'}})}}
+                            <div class="text-danger">{{form_errors(registrationForm.phone)}}</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registration_form_password_first">Mot de passe</label>
                             {{form_widget(registrationForm.password.first, {'attr': {'class':'form-control', 'placeholder':'Au moins 12 caractères'}})}}
                             <div class="text-danger">{{form_errors(registrationForm.password.first)}}</div>
                             <small><em>Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.</em></small>
                         </div>
                         <div class="mb-3">
-                            <label for="registration_form_password_second">Confirmation du mot de passe <span class="text-danger">*</span></label>
+                            <label for="registration_form_password_second">Confirmation du mot de passe</label>
                             {{form_widget(registrationForm.password.second, {'attr': {'class':'form-control'}})}}
                             <div class="text-danger">{{form_errors(registrationForm.password.second)}}</div>
                         </div>
@@ -53,7 +58,7 @@
                             <label for="registration_form_agreeTerms">
                                 Lire et accepter
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="text-info">les conditions générales d'utilisation</a> 
-                                <span class="text-danger">*</span>
+                               
                             </label>
                             <div class="text-danger">{{form_errors(registrationForm.agreeTerms)}}</div>
                             <!-- Modal -->
