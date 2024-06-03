@@ -1,0 +1,49 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Modifier mes informations personnelles{% endblock %}
+
+{% block description %}Modifier mes informations personnelles{% endblock %}
+
+{% block keywords %}Profil, Utilisateur, Modifier, Informations, Personnelles, Padel, Time{% endblock %}
+
+{% block main %}
+
+    <div class="grey2 text-white">
+        <div class="container py-5">
+            <h1 class="text_size_l pb-5 text-center">Modifier mes informations personnelles</h1>
+            <div class="card w-75 mx-auto">
+                <p class="card-header text_size_m bg-primary bg-opacity-25">Mes informations</p>
+                <div class="row card-body">
+                    <div class="col-lg-7">
+                        {{ form_start(form) }}
+                            <div class="mb-3">
+                                <label for="edit_my_profile_form_lastName">Nom</label>
+                                {{form_widget(form.lastName, {'attr': {'class': 'form-control'}})}}
+                                <div class="text-danger">{{ form_errors(form.lastName) }}</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_my_profile_form_firstName">Prénom</label>
+                                {{form_widget(form.firstName, {'attr': {'class': 'form-control'}})}}
+                                <div class="text-danger">{{ form_errors(form.firstName) }}</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_my_profile_form_phone">Numéro de téléphone</label>
+                                {{form_widget(form.phone, {'attr': {'class': 'form-control'}})}}
+                                <div class="text-danger">{{ form_errors(form.phone) }}</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_my_profile_form_email">Email</label>
+                                {{form_widget(form.email, {'attr': {'class': 'form-control'}})}}
+                                <div class="text-danger">{{ form_errors(form.email) }}</div>
+                            </div>
+                            <div>
+                                <input formnovalidate type="submit" class="btn btn-primary" value="Modifier">
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+                
+{% endblock %}

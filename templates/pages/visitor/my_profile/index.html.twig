@@ -12,6 +12,8 @@
         <div class="container py-5">
             <h1 class="text_size_xl pb-5 text-center">Mon profil</h1>
 
+            {% include 'components/_alert.html.twig' %}
+
             <div class="accordion pb-5" id="accordionPanelsStayOpenExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
@@ -26,7 +28,14 @@
                             <p class="pb-2 text_size_s">{{ app.user.email }}</p>
                             <span class="text_size_xs">Téléphone :</span>
                             <p class="py-2 text_size_s">{{ app.user.phone }}</p>
-                            <a href="" class="btn btn-primary my-2">Modifier le profil</a>
+                            <a href="{{path('visitor_myProfile_edit')}}" class="btn btn-primary my-2">Modifier mon profil</a>
+                            <a href="{{path('visitor_myProfile_edit_password')}}" class="btn btn-dark my-2">Modifier mon mot de passe</a>
+                            {% if "ROLE_SUPER_ADMIN" not in app.user.roles %}
+                                <form action="{{path('visitor_myProfile_delete')}}" method="POST" class="d-inline">
+                                    <input type="hidden" name="_csrf_token" value="{{csrf_token('delete_profile')}}">
+                                    <input onclick="return confirm('Confirmer la suppression de votre compte ?')" type="submit" class="btn btn-danger my-2" value="Supprimer mon compte">
+                                </form>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -38,19 +47,7 @@
                     </h2>
                     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
                         <div class="accordion-body">
-                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                        Accordion Item #3
-                    </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            
                         </div>
                     </div>
                 </div>
