@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Controller\User\Booking;
+namespace App\Controller\Visitor\Booking;
+
 
 use App\Repository\SettingRepository;
 use App\Service\DateService;
@@ -22,7 +23,7 @@ class BookingController extends AbstractController
     {
         $nextFourteenDays = $this->dateService->getNextFourteenDays();
 
-        return $this->render('pages/user/booking/index.html.twig', [
+        return $this->render('pages/visitor/booking/index.html.twig', [
             'days' => $nextFourteenDays,
             'setting' => $settingRepository->find(4)
         ]);
