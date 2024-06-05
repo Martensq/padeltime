@@ -8,12 +8,12 @@
 
 {% block main %}
 
-    <div class="grey2 text-white text-center">
+    <div class="grey2 text-white text-center py-5">
         <div class="container">
             <!-- Contact et coordonnées -->
             <section>
                 <!-- Titre -->
-                <h1 class="text_size_xl py-5">NOUS CONTACTER</h1>
+                <h1 class="text_size_xl pb-5">NOUS CONTACTER</h1>
 
                 <!-- Form -->
                 
@@ -24,27 +24,27 @@
                         <div class="col-md-8 col-lg-4 mx-auto mb-5">
                             {{ form_start(form) }}
                                 <div class="mb-3">
-                                    <label for="contact_form_firstName">Prénom <span class="text-danger">*</span></label>
+                                    <label for="contact_form_firstName">Prénom</label>
                                     {{ form_widget(form.firstName, {'attr': {'class':'form-control'}}) }}
                                     <div class="text-danger">{{ form_errors(form.firstName) }}</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="contact_form_lastName">Nom <span class="text-danger">*</span></label>
+                                    <label for="contact_form_lastName">Nom</label>
                                     {{ form_widget(form.lastName, {'attr': {'class':'form-control'}}) }}
                                     <div class="text-danger">{{ form_errors(form.lastName) }}</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="contact_form_email">Email <span class="text-danger">*</span></label>
+                                    <label for="contact_form_email">Email</label>
                                     {{ form_widget(form.email, {'attr': {'class':'form-control'}}) }}
                                     <div class="text-danger">{{ form_errors(form.email) }}</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="contact_form_phone">Phone <span class="text-danger">*</span></label>
+                                    <label for="contact_form_phone">Phone</label>
                                     {{ form_widget(form.phone, {'attr': {'class':'form-control'}}) }}
                                     <div class="text-danger">{{ form_errors(form.phone) }}</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="contact_form_message">Commentaire <span class="text-danger">*</span></label>
+                                    <label for="contact_form_message">Commentaire</label>
                                     {{ form_widget(form.message, {'attr': {'class':'form-control'}}) }}
                                     <div class="text-danger">{{ form_errors(form.message) }}</div>
                                 </div>
@@ -59,12 +59,12 @@
                 <!-- Coordonnées -->
                 <div class="d-flex flex-column align-items-center flex-md-row justify-content-md-evenly pb-5">
                     <div class="ms-md-5">
-                        <img src="/logos/tel.png" class="mb-2" width="50" alt="">
-                        <p class="text_size_m">{{setting.phone}}</p>
+                        <img src="/logos/tel.png" class="mb-2" width="50" alt="Téléphone">
+                        <p class="text_size_s">{{setting.phone}}</p>
                     </div>
                     <div>
-                        <img src="/logos/mail.png" class="mb-2" width="50" alt="">
-                        <p class="text_size_m">{{setting.email}}</p>
+                        <img src="/logos/mail.png" class="mb-2" width="50" alt="Courrier">
+                        <p class="text_size_s">{{setting.email}}</p>
                     </div>
                 </div>
             </section>

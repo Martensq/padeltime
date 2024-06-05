@@ -46,7 +46,7 @@
                             <label for="registration_form_password_first">Mot de passe</label>
                             {{form_widget(registrationForm.password.first, {'attr': {'class':'form-control', 'placeholder':'Au moins 12 caractères'}})}}
                             <div class="text-danger">{{form_errors(registrationForm.password.first)}}</div>
-                            <small><em>Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.</em></small>
+                            <small class="fst-italic">Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.</small>
                         </div>
                         <div class="mb-3">
                             <label for="registration_form_password_second">Confirmation du mot de passe</label>
@@ -89,7 +89,7 @@
                     <div class="my-3 text-center">
                         <p>
                             Vous avez déjà un compte ?
-                            <a href="{{path('visitor_authentication_login')}}" class="text-info">Connectez-vous</a>
+                            <a href="{{path('visitor_authentication_login')}}" class="text_yellow">Connectez-vous</a>
                         </p>
                     </div>
                 </div>

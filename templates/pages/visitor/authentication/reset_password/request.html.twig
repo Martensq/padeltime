@@ -8,30 +8,29 @@
 
 {% block main %}
 
-    {% for flash_error in app.flashes('reset_password_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+    <div class="grey2 text-white py_6">
+        <div class="container">
 
-    <h1 class="text-center my-3 display-5">Réinitialisation du mot de passe</h1>
+            <h1 class="text_size_xl text-center">Réinitialiser le mot de passe</h1>
 
-    <div class="container my-5">
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                {{ form_start(requestForm) }}
-                    <div class="mb-3">
-                        <label for="reset_password_request_form_email">Email</label>
-                        {{ form_widget(requestForm.email, {'attr': {'class':'form-control', 'autofocus':'autofocus'}}) }}
-                        <div class="text-danger">{{form_errors(requestForm.email)}}</div>
-                        <small>
-                            <em>
-                                Entrez votre adresse email et nous vous enverrons le lien de réinitialisation de votre mot de passe
-                            </em>
-                        </small>
-                    </div>
-                    <div class="mb-3">
-                        <button formnovalidate class="btn btn-primary">Envoyer le lien</button>
-                    </div>
-                {{ form_end(requestForm) }}
+            {% for flash_error in app.flashes('reset_password_error') %}
+                <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+            {% endfor %}
+
+            <div class="row py-5">
+                <div class="col-md-6 mx-auto">
+                    {{ form_start(requestForm) }}
+                        <div class="mb-3">
+                            <label for="reset_password_request_form_email">Email</label>
+                            {{ form_widget(requestForm.email, {'attr': {'class':'form-control', 'autofocus':'autofocus'}}) }}
+                            <div class="text-danger">{{form_errors(requestForm.email)}}</div>
+                            <small class="fst-italic">Entrez votre adresse email et nous vous enverrons le lien de réinitialisation de votre mot de passe</small>
+                        </div>
+                        <div>
+                            <button formnovalidate class="btn btn-primary">Envoyer le lien</button>
+                        </div>
+                    {{ form_end(requestForm) }}
+                </div>
             </div>
         </div>
     </div>
