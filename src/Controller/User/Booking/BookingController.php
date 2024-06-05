@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Visitor\Booking;
+namespace App\Controller\User\Booking;
 
 
 use App\Repository\SettingRepository;
@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/user')]
 class BookingController extends AbstractController
 {
     private $dateService;
@@ -23,7 +24,7 @@ class BookingController extends AbstractController
     {
         $nextFourteenDays = $this->dateService->getNextFourteenDays();
 
-        return $this->render('pages/visitor/booking/index.html.twig', [
+        return $this->render('pages/user/booking/index.html.twig', [
             'days' => $nextFourteenDays,
             'setting' => $settingRepository->find(4)
         ]);
