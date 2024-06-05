@@ -1,0 +1,651 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Réservez un terrain{% endblock %}
+
+{% block description %}Réservez un terrain{% endblock %}
+
+{% block keywords %}Padel, Tennis, Club, Time, Reservation, Terrain, Piste{% endblock %}
+
+{% block main %}
+
+    <div class="grey2 py-5">
+        <div class="container">
+            <h1 class="text-center text-white pb-5">Reservez un terrain</h1>
+            <div class="d-flex justify-content-center">
+                {% for day in days %}
+                    <a class="btn btn-light">{{ day|date('D j M', 'Europe/Paris', 'fr') }}</a>
+                {% endfor %}
+            </div>
+            {% for day in days %}
+                <div class="row d-flex justify-content-center mt-5">
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">10h00</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">10h30</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">11h00</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">11h30</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">12h00</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">12h30</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">13h00</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">13h30</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">14h00</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">14h30</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">15h00</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">15h30</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">16h00</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">16h30</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">17h00</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">17h30</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">18h00</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">18h30</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">19h00</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">19h30</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">20h00</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">2h</p>
+                                <p class="text_size_s fw-semibold">72€</p>
+                                <small class="fst-italic">18€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">20h30</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                            <div class="vr"></div>
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h30</p>
+                                <p class="text_size_s fw-semibold">54€</p>
+                                <small class="fst-italic">13.50€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 card mb-5 me-5 shadow-lg text-center p-0">
+                        <div class="card-header pb-0">
+                            <p class="mt-2 text_size_m fw-medium">21h00</p>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center py-0 px-0">
+                            <a href="#" class="card-body fw-medium text-decoration-none btn btn-light">
+                                <p class="text_size_s fw-normal">1h</p>
+                                <p class="text_size_s fw-semibold">36€</p>
+                                <small class="fst-italic">9€ / joueur</small>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="fst-italic ">Il reste 1 terrain(s)</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

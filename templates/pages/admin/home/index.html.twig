@@ -8,27 +8,35 @@
 
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">Espace admin</h1>
+    <h1 class="text-center my-3 text_size_xl">Espace admin</h1>
 
-    <p class="text-center">{{ app.user.firstName }} {{ app.user.lastName }}</p>
+    <p class="text-center text_size_s">{{ app.user.firstName }} {{ app.user.lastName }}</p>
 
     <div class="container">
         <div class="row">
-            <div class="col-md-6 mx-auto text-center card shadow p-0 m-5">
-                <h2 class="card-header bg-dark text-white">Les pistes</h2>
-                <span class="card-body py-5 my-5">{{courts|length}}</span>
+            <div class="col-md-10 col-lg-5 mx-auto text-center card shadow p-0 m-5">
+                <a href="{{path('admin_court_index')}}" class="text-decoration-none">
+                    <p class="card-header bg-dark text-white text_size_m">Les pistes</p>
+                    <p class="card-body py-5 my-3 text_size_s text-dark">Il y a <strong>{{courts|length}}</strong> piste(s) créée(s).</p>
+                </a>
             </div>
-            <div class="col-md-6 mx-auto text-center card shadow p-0 m-5">
-                <h2 class="card-header bg-dark text-white">Utilisateurs</h2>
-                <span class="card-body py-5 my-5">{{users|length}}</span>
+            <div class="col-md-10 col-lg-5 mx-auto text-center card shadow p-0 m-5">
+                <a href="{{path('admin_contact_index')}}" class="text-decoration-none">
+                    <p class="card-header bg-dark text-white text_size_m">Contacts</p>
+                    <p class="card-body py-5 my-3 text_size_s text-dark">Il y a <strong>{{contacts|length}}</strong> message(s).</p>
+                </a>
             </div>
-            <div class="col-md-6 mx-auto text-center card shadow p-0 m-5">
-                <h2 class="card-header bg-dark text-white">Contacts</h2>
-                <span class="card-body py-5 my-5">{{contacts|length}}</span>
+            <div class="col-md-10 col-lg-5 mx-auto text-center card shadow p-0 m-5">
+                <a href="{{path('admin_user_index')}}" class="text-decoration-none">
+                    <p class="card-header bg-dark text-white text_size_m">Utilisateurs</p>
+                    <p class="card-body py-5 my-3 text_size_s text-dark">Il y a <strong>{{users|length}}</strong> compte(s) utilisateur créé(s).</p>
+                </a>
             </div>
-            <div class="col-md-6 mx-auto text-center card shadow p-0 m-5">
-                <h2 class="card-header bg-dark text-white">Réservations</h2>
-                <span class="card-body py-5 my-5"></span>
+            <div class="col-md-10 col-lg-5 mx-auto text-center card shadow p-0 m-5">
+                <a href="#" class="text-decoration-none">
+                    <p class="card-header bg-dark text-white text_size_m">Réservations</p>
+                    <p class="card-body py-5 my-3 text_size_s text-dark">Il y a <strong>x</strong> réservation(s) en cours.</p>
+                </a>
             </div>
         </div>
     </div>
