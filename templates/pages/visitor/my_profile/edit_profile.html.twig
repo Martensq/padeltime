@@ -8,12 +8,12 @@
 
 {% block main %}
 
-    <div class="grey2 text-white">
+    <div class="grey2 text-white pb-4">
         <div class="container py-5">
-            <h1 class="text_size_l pb-5 text-center">Modifier mes informations personnelles</h1>
+            <h1 class="text_size_xl pb-5 text-center">Mon profil</h1>
             <div class="card w-75 mx-auto">
-                <p class="card-header text_size_m bg-primary bg-opacity-25">Mes informations</p>
-                <div class="row card-body">
+                <p class="card-header text_size_m bg-primary bg-opacity-25">Modifier mes informations</p>
+                <div class="row card-body p-4">
                     <div class="col-lg-7">
                         {{ form_start(form) }}
                             <div class="mb-3">
@@ -37,7 +37,7 @@
                                 <div class="text-danger">{{ form_errors(form.email) }}</div>
                             </div>
                             <div>
-                                <input formnovalidate type="submit" class="btn btn-primary" value="Modifier">
+                                <input formnovalidate type="submit" class="btn btn-primary mt-2" value="Modifier">
                             </div>
                         {{ form_end(form) }}
                     </div>

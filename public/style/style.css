@@ -1,6 +1,6 @@
 * {
     font-family: "Poppins", sans-serif;
-    font-weight: 400;
+    font-weight: 350;
     font-style: normal;
 }
 
@@ -19,10 +19,6 @@
 
 .text_yellow {
     color: #f1eb34;
-}
-
-.text_size_xs {
-    font-size: 15px;
 }
 
 .text_size_s {

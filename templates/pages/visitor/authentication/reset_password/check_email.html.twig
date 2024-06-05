@@ -7,13 +7,13 @@
 {% block keywords %}Lien, réinitialisation, mot-de-passe, envoyé{% endblock %}
 
 {% block main %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 mx-auto">
+    <div class="grey2 text-white text_size_s py_6">
+        <div class="container py-5">
+            <div class="w-75 mx-auto">
                 <p>Si vous avez entré une bonne adresse email, l'email de réinitialisation du mot de passe vous a été envoyé.</p>
                 <p>Veuillez donc consulter votre boite mail.</p>
                 <p>Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
-                <p>Si vous ne recevez pas d'email, regardez dans vos spam ou <a href="{{ path('visitor_authentication_forgot_password_request') }}">réessayez</a>.</p>
+                <p>Si vous ne recevez pas d'email, regardez dans vos spam ou <a href="{{ path('visitor_authentication_forgot_password_request') }}" class="text-info">réessayez</a>.</p>
             </div>
         </div>
     </div>
