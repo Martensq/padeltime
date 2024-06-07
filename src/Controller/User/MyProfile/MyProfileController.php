@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Controller\Visitor\MyProfile;
+namespace App\Controller\User\MyProfile;
+
 
 use App\Entity\User;
 use DateTimeImmutable;
@@ -24,7 +25,7 @@ class MyProfileController extends AbstractController
     {
     }
 
-    #[Route('/my-profile', name: 'visitor_myProfile_index')]
+    #[Route('/mon-profil', name: 'visitor_myProfile_index')]
     public function index(): Response
     {
         return $this->render('pages/visitor/my_profile/index.html.twig', [
@@ -32,7 +33,7 @@ class MyProfileController extends AbstractController
         ]);
     }
 
-    #[Route('/my-profile/edit', name: 'visitor_myProfile_edit', methods: ['GET', 'POST'])]
+    #[Route('/mon-profil/modifier', name: 'visitor_myProfile_edit', methods: ['GET', 'POST'])]
     public function editProfile(Request $request): Response
     {    
         $user = $this->getUser();
@@ -57,7 +58,7 @@ class MyProfileController extends AbstractController
         ]);
     }
 
-    #[Route('/my-profile/edit/password', name: 'visitor_myProfile_edit_password', methods: ['GET', 'POST'])]
+    #[Route('/mon-profil/modifier/mot-de-passe', name: 'visitor_myProfile_edit_password', methods: ['GET', 'POST'])]
     public function editPassword(Request $request, UserPasswordHasherInterface $hasher): Response
     {
         $user = $this->getUser();
@@ -88,7 +89,7 @@ class MyProfileController extends AbstractController
         ]);
     }
 
-    #[Route('/my-profile/delete}', name: 'visitor_myProfile_delete', methods: ['POST'])]
+    #[Route('/mon-profil/supprimer}', name: 'visitor_myProfile_delete', methods: ['POST'])]
     public function delete(Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete_profile', $request->request->get('_csrf_token')))
