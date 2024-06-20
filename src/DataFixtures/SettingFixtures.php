@@ -23,12 +23,12 @@ class SettingFixtures extends Fixture
         $setting = new Setting();
 
         $setting->setClubName("Padel Time")
-                ->setPeakHoursPrice("10")
-                ->setOffPeakHoursPrice("8")
+                ->setPeakHoursPrice("40")
+                ->setOffPeakHoursPrice("32")
                 ->setRacketRentalPrice("2")
                 ->setBallPrice("6")
-                ->setWeekOpeningHours("10h - 22h")
-                ->setWeekEndOpeningHours("10h - 00h")
+                ->setWeekOpeningHours("10h - 21h")
+                ->setWeekEndOpeningHours("10h - 23h")
                 ->setEmail("quentin.martens@orange.fr")
                 ->setPhone("06 33 47 49 60")
                 ->setAddress("3 bis rue de Paris, 94370 Sucy-en-Brie")

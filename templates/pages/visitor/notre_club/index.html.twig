@@ -27,7 +27,7 @@
                         <p class="mt-2 text_size_m fw-medium">Heures creuses</p>
                     </div>
                     <div class="card-body d-flex flex-column justify-content-evenly">
-                        <p class="card-title text_size_s fw-medium">{{setting.offPeakHoursPrice}}€ / heure / personne</p>
+                        <p class="card-title text_size_s fw-medium">{{setting.offPeakHoursPrice / 4}}€ / heure / personne</p>
                         <div>
                             <p class="card-text">du lundi au vendredi</p>
                             <p class="card-text">de 10h à 17h</p>
@@ -39,10 +39,10 @@
                         <p class="mt-2 text_size_m fw-medium">Heures pleines</p>
                     </div>
                     <div class="card-body d-flex flex-column justify-content-evenly">
-                        <p class="card-title text_size_s fw-medium">{{setting.peakHoursPrice}}€ / heure / personne</p>
+                        <p class="card-title text_size_s fw-medium">{{setting.peakHoursPrice / 4}}€ / heure / personne</p>
                         <div>
                             <p class="card-text">du lundi au vendredi</p>
-                            <p class="card-text">de 17h à 22h</p>
+                            <p class="card-text">de 17h à 21h</p>
                             <p class="card-text">+ week-end</p>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                 <img src="/logos/balle.png" class="mb-2" width="40px" alt="Balle">
                 <p class="text-white text_size_s">Achat balles : {{setting.ballPrice}}€</p>
             </div>
-            <a class="mb-5 btn btn-primary btn-lg blue_color btn_resa" href="{{path('user_booking_index')}}">Réservez un terrain</a>
+            <a class="mb-5 btn btn-primary btn-lg blue_color btn_resa" href="{{path('user_booking_index', {'annee' : "now"|date("Y"), 'mois' : "now"|date("m"), 'jour' : "now"|date("d")})}}">Réservez un terrain</a>
         </section>
 
         <!-- Nous trouver -->

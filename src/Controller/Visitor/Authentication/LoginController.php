@@ -28,7 +28,8 @@ class LoginController extends AbstractController
 
         // 1- Afficher la page de connexion
         return $this->render('pages/visitor/authentication/login.html.twig', [
-            'last_username' => $lastUsername, 'error' => $error,
+            'last_username' => $lastUsername,
+            'error' => $error,
             'setting' => $settingRepository->find(4)
         ]);
     }

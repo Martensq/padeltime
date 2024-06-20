@@ -78,7 +78,7 @@
                                     <li><a class="dropdown-item" href="{{path('visitor_myProfile_index')}}">Mon profil</a></li>
                                     <li><a class="dropdown-item" href="{{path('app_logout')}}">Déconnexion</a></li>
                                 </ul>
-                                <a href="{{path('user_booking_index')}}"><img src="/logos/reservation_bleu.png" width="50" alt=""></a>
+                                <a href="{{path('user_booking_index', {'annee' : "now"|date("Y"), 'mois' : "now"|date("m"), 'jour' : "now"|date("d")})}}"><img src="/logos/reservation_bleu.png" width="50" alt=""></a>
                             </div>
                         {% else %}
                             <div class="d-flex align-items-end">

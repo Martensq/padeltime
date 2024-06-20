@@ -11,14 +11,27 @@
     <div class="grey2 py-5">
         <div class="container">
             <h1 class="text-center text-white pb-5">Reservez un terrain</h1>
+
             <div class="row d-flex justify-content-center">
                 {% for day in days %}
-                    <a class="col-3 col-md-2 me-1 mb-1 btn btn-light">{{ day|date('D j M', 'Europe/Paris', 'fr') }}</a>
+                    <a 
+                        class="col-3 col-md-2 me-1 mb-1 btn btn-light"
+                        href="{{path('user_booking_index', {'annee' : day|date("Y"), 'mois' : day|date("m"), 'jour' : day|date("d")})}}"
+                    >{{ day|date('D j M', 'Europe/Paris', 'fr') }}</a>
                 {% endfor %}
             </div>
-            {% for day in days %}
-                
-            {% endfor %}
+
+            {% if noSlotsAvailable %}
+                <div class="d-flex justify-content-center align-items-center text-white my-5 py-5">
+                    <p class="my-5">Aucune piste disponible</p>
+                </div>
+            {% else %}
+                <div class="row d-flex justify-content-center mt-5">
+                    {% for slot in slotsForDay %}
+                        {% include 'components/_booking_slot.html.twig' %}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
     </div>
 
