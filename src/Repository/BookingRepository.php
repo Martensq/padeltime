@@ -40,4 +40,15 @@ class BookingRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    
+
+    public function findByDate($date)
+    {
+        $query = $this->createQueryBuilder('b')
+            ->where('b.startDate LIKE :date')
+            ->setParameter('date', $date->format('Y-m-d') . '%')
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }

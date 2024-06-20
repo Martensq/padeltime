@@ -16,7 +16,7 @@
                 <h1 class="text-white text_size_xl">Bienvenue chez {{setting.clubName|upper}}</h1>
                 <h2 class="text-white text_size_l">Club de padel en ile de france</h2>
             </div>
-            <a class="btn btn-primary btn-lg btn_resa text-white" href="{{path('user_booking_index')}}">Réservez un terrain</a>
+            <a class="btn btn-primary btn-lg btn_resa text-white" href="{{path('user_booking_index', {'annee' : "now"|date("Y"), 'mois' : "now"|date("m"), 'jour' : "now"|date("d")})}}">Réservez un terrain</a>
         </div>
     </section>
 
@@ -78,19 +78,19 @@
         <div class="container text_size_m pt-3 pb-1">
             <div class="row d-flex justify-content-between">
                 <div class="col-md-3 text-center mb-5 mb-md-0">
-                    <a class="text-decoration-none text_yellow" href="{{path('visitor_lePadel_index')}}#regles">
+                    <a class="text-decoration-none text_yellow btn btn-lg" href="{{path('visitor_lePadel_index')}}#regles">
                         <i class="fa-solid fa-scale-balanced fa-2xl mb-4"></i>
                         <p>Règles et niveaux</p>
                     </a>
                 </div>
                 <div class="col-md-3 text-center mb-5 mb-md-0">
-                    <a class="text-decoration-none text_yellow" href="{{path('visitor_notreClub_index')}}">
+                    <a class="text-decoration-none text_yellow btn btn-lg" href="{{path('visitor_notreClub_index')}}">
                         <i class="fa-solid fa-euro-sign fa-2xl mb-4"></i>
                         <p>Tarifs et horaires</p>
                     </a>
                 </div>
                 <div class="col-md-3 text-center">
-                    <a class="text-decoration-none text_yellow" href="{{path('user_booking_index')}}">
+                    <a class="text-decoration-none text_yellow btn btn-lg" href="{{path('user_booking_index', {'annee' : "now"|date("Y"), 'mois' : "now"|date("m"), 'jour' : "now"|date("d")})}}">
                         <i class="fa-regular fa-calendar-check fa-2xl mb-4"></i>
                         <p>Réservation</p>
                     </a>
@@ -109,13 +109,13 @@
 
                 <!-- Map -->
                 <div class="col-lg-6 me-5 mb-md-5 mb-lg-0">
-                    <iframe src="{{setting.mapLink}}" class="d-none d-md-block" width="550" height="550" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="{{setting.mapLink}}" class="d-none mx-md-auto d-md-block" width="550" height="550" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
 
                 <!-- Form -->
 
-                <div class="col-8 col-lg-4 mx-auto text-white">
+                <div class="col-10 col-lg-4 mx-auto text-white">
                     <h3 class="text_size_l pb-4">Nous contacter</h3>
 
                     {{ form_start(form) }}
