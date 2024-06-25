@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\BookingRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
 class Booking
@@ -14,15 +16,22 @@ class Booking
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTime $startDate = null;
+    #[Assert\NotBlank(message: "L'horaire de début est obligatoire")]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private ?\DateTimeImmutable $startDate = null;
 
+    #[Assert\NotBlank(message: "La durée est obligatoire")]
+    #[Assert\Length(
+        max: 1,
+        maxMessage: "Le numéro ne doit pas dépasser {{ limit }} chiffres.",
+    )]
+    #[Assert\Regex(
+        pattern: "/[1-2]+/",
+        match: true,
+        message: 'Seuls 1 et 2 sont autorisés.',
+    )]
     #[ORM\Column]
     private ?float $duration = null;
-
-    #[ORM\ManyToOne(inversedBy: 'bookings')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Court $court = null;
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
@@ -44,17 +53,17 @@ class Booking
         return $this->id;
     }
 
-    public function getStartDate(): ?\DateTime
+    public function getStartDate(): ?\DateTimeImmutable
     {
         return $this->startDate;
     }
 
-    public function getEndDate(): ?\DateTime
+    public function getEndDate(): ?\DateTimeImmutable
     {
         return $this->startDate->modify('+' . $this->duration . ' hour');
     }
 
-    public function setStartDate(\DateTime $startDate): static
+    public function setStartDate(\DateTimeImmutable $startDate): static
     {
         $this->startDate = $startDate;
 
@@ -69,18 +78,6 @@ class Booking
     public function setDuration(float $duration): static
     {
         $this->duration = $duration;
-
-        return $this;
-    }
-
-    public function getCourt(): ?Court
-    {
-        return $this->court;
-    }
-
-    public function setCourt(?Court $court): static
-    {
-        $this->court = $court;
 
         return $this;
     }

@@ -33,9 +33,9 @@
                 </a>
             </div>
             <div class="col-md-10 col-lg-5 mx-auto text-center card shadow p-0 m-5">
-                <a href="#" class="text-decoration-none">
+                <a href="{{path('admin_booking_index')}}" class="text-decoration-none">
                     <p class="card-header bg-dark text-white text_size_m">Réservations</p>
-                    <p class="card-body py-5 my-3 text_size_s text-dark">Il y a <strong>x</strong> réservation(s) en cours.</p>
+                    <p class="card-body py-5 my-3 text_size_s text-dark">Il y a <strong>{{bookings|length}}</strong> réservation(s) en cours.</p>
                 </a>
             </div>
         </div>

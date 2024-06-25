@@ -75,7 +75,7 @@
                             {% endif %}
                                 <a class="pe-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="/logos/utilisateur.png" width="40" alt=""></a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{path('visitor_myProfile_index')}}">Mon profil</a></li>
+                                    <li><a class="dropdown-item" href="{{path('user_myProfile_index')}}">Mon profil</a></li>
                                     <li><a class="dropdown-item" href="{{path('app_logout')}}">Déconnexion</a></li>
                                 </ul>
                                 <a href="{{path('user_booking_index', {'annee' : "now"|date("Y"), 'mois' : "now"|date("m"), 'jour' : "now"|date("d")})}}"><img src="/logos/reservation_bleu.png" width="50" alt=""></a>

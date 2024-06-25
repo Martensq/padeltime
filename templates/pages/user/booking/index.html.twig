@@ -12,6 +12,8 @@
         <div class="container">
             <h1 class="text-center text-white pb-5">Reservez un terrain</h1>
 
+            {% include 'components/_alert.html.twig' %}
+
             <div class="row d-flex justify-content-center">
                 {% for day in days %}
                     <a 
