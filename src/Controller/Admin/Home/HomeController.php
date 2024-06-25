@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin\Home;
 
+use App\Repository\BookingRepository;
 use App\Repository\ContactRepository;
 use App\Repository\CourtRepository;
 use App\Repository\SettingRepository;
@@ -18,6 +19,7 @@ class HomeController extends AbstractController
         CourtRepository $courtRepository,
         ContactRepository $contactRepository,
         UserRepository $userRepository,
+        BookingRepository $bookingRepository,
         SettingRepository $settingRepository
     ): Response
     {
@@ -25,6 +27,7 @@ class HomeController extends AbstractController
             "courts" => $courtRepository->findAll(),
             "contacts" => $contactRepository->findAll(),
             "users" => $userRepository->findAll(),
+            "bookings" => $bookingRepository->findAll(),
             "setting" => $settingRepository->find(4)
         ]);
     }

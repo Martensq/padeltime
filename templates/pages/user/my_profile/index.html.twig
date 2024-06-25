@@ -28,14 +28,14 @@
                     </div>
                     <div class="d-md-flex">
                         <div class="me-md-2">
-                            <a href="{{path('visitor_myProfile_edit')}}" class="btn btn-primary my-2">Modifier mon profil</a>
+                            <a href="{{path('user_myProfile_edit')}}" class="btn btn-primary my-2">Modifier mon profil</a>
                         </div>
                         <div class="me-md-2">
-                            <a href="{{path('visitor_myProfile_edit_password')}}" class="btn btn-dark my-2">Modifier mon mot de passe</a>
+                            <a href="{{path('user_myProfile_edit_password')}}" class="btn btn-dark my-2">Modifier mon mot de passe</a>
                         </div>
                         <div>
                             {% if "ROLE_SUPER_ADMIN" not in app.user.roles %}
-                                <form action="{{path('visitor_myProfile_delete')}}" method="POST" class="d-inline">
+                                <form action="{{path('user_myProfile_delete')}}" method="POST" class="d-inline">
                                     <input type="hidden" name="_csrf_token" value="{{csrf_token('delete_profile')}}">
                                     <input onclick="return confirm('Confirmer la suppression de votre compte ?')" type="submit" class="btn btn-danger my-2" value="Supprimer mon compte">
                                 </form>
@@ -46,7 +46,20 @@
             </div>
             <div class="card w-75 mx-auto mt-5">
                 <p class="card-header text_size_m bg-primary bg-opacity-25">Mes réservations</p>
-                <div class="row card-body p-4">
+                <div class="row d-flex justify-content-center card-body pb-5">
+                    <p class="fst-italic">Pour modifier ou supprimer une réservation, appelez le {{setting.phone}}</p>
+                    {% for booking in bookings %}
+                        <div class="col-12 col-lg-4 card mt-5 mx-3 p-0 text-center">
+                            <div class="card-header pb-0">
+                                <p class="mt-2 text_size_s fw-normal">{{booking.startDate|date('l j F')}}</p>
+                            </div>
+                            <div class="row card-body p-4">
+                                <div>
+                                    <p class="py-2 text_size_s fw-normal">{{booking.startDate|date('H')}}h00 - {{booking.startDate|date('H') + booking.duration}}h00</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

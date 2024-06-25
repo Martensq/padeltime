@@ -3,10 +3,9 @@
 namespace App\Controller\User\MyProfile;
 
 
-use App\Entity\User;
-use DateTimeImmutable;
-use App\Form\EditMyProfileFormType;
 use App\Form\EditPasswordFormType;
+use App\Form\EditMyProfileFormType;
+use App\Repository\BookingRepository;
 use App\Repository\SettingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,20 +19,24 @@ class MyProfileController extends AbstractController
 {
     public function __construct(
         private EntityManagerInterface $em,
-        private SettingRepository $settingRepository
+        private SettingRepository $settingRepository,
+        private BookingRepository $bookingRepository
     )
     {
     }
 
-    #[Route('/mon-profil', name: 'visitor_myProfile_index')]
+    #[Route('/mon-profil', name: 'user_myProfile_index')]
     public function index(): Response
     {
-        return $this->render('pages/visitor/my_profile/index.html.twig', [
-            'setting' => $this->settingRepository->find(4)
+        $bookings = $this->bookingRepository->findByUser($this->getUser());
+
+        return $this->render('pages/user/my_profile/index.html.twig', [
+            'setting' => $this->settingRepository->find(4),
+            'bookings' => $bookings
         ]);
     }
 
-    #[Route('/mon-profil/modifier', name: 'visitor_myProfile_edit', methods: ['GET', 'POST'])]
+    #[Route('/mon-profil/modifier', name: 'user_myProfile_edit', methods: ['GET', 'POST'])]
     public function editProfile(Request $request): Response
     {    
         $user = $this->getUser();
@@ -49,16 +52,16 @@ class MyProfileController extends AbstractController
 
             $this->addFlash("success", "Les informations du profil ont été modifiées");
 
-            return $this->redirectToRoute("visitor_myProfile_index");
+            return $this->redirectToRoute("user_myProfile_index");
         }
 
-        return $this->render("pages/visitor/my_profile/edit_profile.html.twig", [
+        return $this->render("pages/user/my_profile/edit_profile.html.twig", [
             'form' => $form->createView(),
             'setting' => $this->settingRepository->find(4)
         ]);
     }
 
-    #[Route('/mon-profil/modifier/mot-de-passe', name: 'visitor_myProfile_edit_password', methods: ['GET', 'POST'])]
+    #[Route('/mon-profil/modifier/mot-de-passe', name: 'user_myProfile_edit_password', methods: ['GET', 'POST'])]
     public function editPassword(Request $request, UserPasswordHasherInterface $hasher): Response
     {
         $user = $this->getUser();
@@ -80,16 +83,16 @@ class MyProfileController extends AbstractController
 
             $this->addFlash('success', 'Le mot de passe a été modifié.');
 
-            return $this->redirectToRoute('visitor_myProfile_index');            
+            return $this->redirectToRoute('user_myProfile_index');            
         }
 
-        return $this->render("pages/visitor/my_profile/edit_password.html.twig", [
+        return $this->render("pages/user/my_profile/edit_password.html.twig", [
             'form' => $form->createView(),
             'setting' => $this->settingRepository->find(4)
         ]);
     }
 
-    #[Route('/mon-profil/supprimer}', name: 'visitor_myProfile_delete', methods: ['POST'])]
+    #[Route('/mon-profil/supprimer}', name: 'user_myProfile_delete', methods: ['POST'])]
     public function delete(Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete_profile', $request->request->get('_csrf_token')))
@@ -103,7 +106,7 @@ class MyProfileController extends AbstractController
             $this->em->flush();
         }
 
-        return $this->redirectToRoute("visitor_myProfile_index");
+        return $this->redirectToRoute("user_myProfile_index");
     }
 
 }

@@ -4,7 +4,6 @@ namespace App\Controller\User\Booking;
 
 use DateTimeImmutable;
 use App\Entity\Booking;
-use App\Entity\Setting;
 use App\Repository\CourtRepository;
 use App\Repository\BookingRepository;
 use App\Repository\SettingRepository;
@@ -114,11 +113,11 @@ class BookingController extends AbstractController
 
             // Vérifier s'il y a des réservations de 2 heures qui affectent l'heure actuelle
             foreach ($previousHourBookings as $previousHourBooking) {
-                $bookingStartHour = $previousHourBooking->getStartDate()->format('H');
-                $bookingEndHour = $previousHourBooking->getEndDate()->format('H');
+                $bookingDuration = $previousHourBooking->getDuration();
                 
-                // Si la réservation dure 2 heures et a commencé à l'heure précédente
-                if (($bookingEndHour - $bookingStartHour) == 2 && $bookingStartHour == ($hour - 1)) {
+                
+                // Si la réservation dure 2 heures, ajoute 1 à la variable $twoHourBookingsPreviousHour
+                if ($bookingDuration == 2) {
                     $twoHourBookingsPreviousHour++;
                 }
             }
@@ -159,7 +158,6 @@ class BookingController extends AbstractController
                 ];
             }
         }
-
         return $slots;
     }
 
@@ -196,35 +194,57 @@ class BookingController extends AbstractController
         ]);
     }
 
-    #[Route('/reservation/{annee}/{mois}/{jour}/{heure}/{duree}/confirmation', name: 'user_booking_confirm')]
-    public function newBookingConfirm($annee, $mois, $jour, $heure, $duree): Response
+    #[Route('/reservation/confirmation/{annee}/{mois}/{jour}/{heure}/{duree}/{price}', name: 'user_booking_confirm')]
+    public function newBookingConfirm($annee, $mois, $jour, $heure, $duree, $price): Response
     {
         // Créer un objet DateTimeImmutable à partir des paramètres de date et heure
         $date = new DateTimeImmutable("$annee-$mois-$jour $heure:00");
+        $slotsForDay = $this->generateSlotsForDay($date);
+
+        // Vérifier si le créneau demandé existe dans les créneaux générés
+        if (!isset($slotsForDay[$heure]) || !in_array($duree, $slotsForDay[$heure]['durations'])) {
+            return $this->redirectToRoute('user_booking_index', [
+                'annee' => date('Y'),
+                'mois' => date('m'),
+                'jour' => date('d'),
+            ]);
+        }
 
         return $this->render("pages/user/booking/confirm.html.twig", [
             'date' => $date,
             'duree' => $duree,
+            'price' => $price,
             'setting' => $this->settingRepository->find(4)
         ]);
     }
     
-    #[Route('/reservation/create', name: 'user_booking_index')]
-    public function create(): Response
+    #[Route('/reservation/nouvelle/{annee}/{mois}/{jour}/{heure}/{duree}/{price}', name: 'user_booking_create')]
+    public function create($annee, $mois, $jour, $heure, $duree, $price): Response
     {
+        // Créer un objet DateTimeImmutable à partir des paramètres de date et heure
+        $date = new DateTimeImmutable("$annee-$mois-$jour $heure:00");
+
+        // // Créer une nouvelle réservation et la sauvegarder en base de données
         $booking = new Booking();
 
-        // $booking->setCourtNumber(\count($this->courtRepository->findAll()) + 1)
-        //         ->setAvailable(false)
-        //         ->setCreatedAt(new DateTimeImmutable())
-        //         ->setUpdatedAt(new DateTimeImmutable());
+        $booking->setStartDate($date)
+                ->setDuration($duree)
+                ->setPrice($price)
+                ->setUser($this->getUser())
+                ->setCreatedAt(new DateTimeImmutable())
+                ->setUpdatedAt(new DateTimeImmutable());
 
-        // $this->em->persist($court);
+        $this->em->persist($booking);
+        $this->em->flush();
 
-        // $this->em->flush();
-        
-        // $this->addFlash('success', "Une nouvelle piste a été ajoutée avec succès.");
+        $this->addFlash("success", "La réservation a été confirmée");
 
-        // return $this->redirectToRoute('admin_court_index');
+
+        // Rediriger vers une page de confirmation ou d'accueil
+        return $this->redirectToRoute('user_booking_index', [
+            'annee' => date($annee),
+            'mois' => date($mois),
+            'jour' => date($jour)
+        ]);
     }
 }

@@ -44,11 +44,20 @@ class BookingRepository extends ServiceEntityRepository
 
     public function findByDate($date)
     {
-        $query = $this->createQueryBuilder('b')
-            ->where('b.startDate LIKE :date')
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.startDate LIKE :date')
             ->setParameter('date', $date->format('Y-m-d') . '%')
-            ->getQuery();
+            ->getQuery()
+            ->getResult();
+    }
 
-        return $query->getResult();
+    public function findByUser($user)
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('b.startDate', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 }

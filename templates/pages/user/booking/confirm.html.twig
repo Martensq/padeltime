@@ -13,31 +13,27 @@
             <div class="w-75 mx-auto">{% include 'components/_alert.html.twig' %}</div>
 
             <div class="card w-75 mx-auto my-4">
-                <p class="card-header text_size_m bg-primary bg-opacity-25">Ma réservation</p>
+                <h3 class="card-header text_size_m bg-primary bg-opacity-25">Ma réservation</h3>
                 <div class="row card-body p-4">
-                    <h3 class="py-2">{{ app.user.firstName }} {{ app.user.lastName }}</h3>
+                    <h4 class="py-2">{{ app.user.firstName }} {{ app.user.lastName }}</h4>
                     <div>
                         <span class="text_size_xs">Date :</span>
-                        <p class="pb-2 text_size_s">{{date|date('l j F')}}</p>
+                        <p class="pb-2 text_size_s fw-normal">{{date|date('l j F')}}</p>
                     </div>
                     <div>
                         <span class="text_size_xs">Créneau :</span>
-                        <p class="py-2 text_size_s">{{date|date('H')}}h00 - {{date|date('H') + duree}}h00</p>
+                        <p class="py-2 text_size_s fw-normal">{{date|date('H')}}h00 - {{date|date('H') + duree}}h00</p>
+                    </div>
+                    <div>
+                        <span class="text_size_xs">Prix :</span>
+                        <p class="py-2 text_size_s fw-normal">{{price}}€</p>
                     </div>
                     <div class="d-md-flex">
                         <div class="me-md-2">
-                            <a href="{{path('user_booking_create')}}" class="btn btn-primary my-2">Confirmer la réservation</a>
+                            <a href="{{path('user_booking_create', {'annee' : date|date("Y"), 'mois' : date|date("m"), 'jour' : date|date("d"), 'heure' : date|date("H"), 'duree' : duree, 'price' : price})}}" class="btn btn-primary my-2">Confirmer la réservation</a>
                         </div>
                         <div class="me-md-2">
                             <a href="{{path('user_booking_index', {'annee' : date|date("Y"), 'mois' : date|date("m"), 'jour' : date|date("d")})}}" class="btn btn-danger my-2">Annuler</a>
-                        </div>
-                        <div>
-                            {% if "ROLE_SUPER_ADMIN" not in app.user.roles %}
-                                <form action="{{path('visitor_myProfile_delete')}}" method="POST" class="d-inline">
-                                    <input type="hidden" name="_csrf_token" value="{{csrf_token('delete_profile')}}">
-                                    <input onclick="return confirm('Confirmer la suppression de votre compte ?')" type="submit" class="btn btn-danger my-2" value="Supprimer mon compte">
-                                </form>
-                            {% endif %}
                         </div>
                     </div>
                 </div>
