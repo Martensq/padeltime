@@ -28,7 +28,7 @@ class MyProfileController extends AbstractController
     #[Route('/mon-profil', name: 'user_myProfile_index')]
     public function index(): Response
     {
-        $bookings = $this->bookingRepository->findByUser($this->getUser());
+        $bookings = $this->bookingRepository->findFutureBookingsByUser($this->getUser());
 
         return $this->render('pages/user/my_profile/index.html.twig', [
             'setting' => $this->settingRepository->find(4),

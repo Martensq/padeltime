@@ -25,35 +25,13 @@ class BookingController extends AbstractController
     #[Route('/booking/list', name: 'admin_booking_index')]
     public function index(): Response
     {
-        $bookings = $this->bookingRepository->findAll();
+        $futureBookings = $this->bookingRepository->findFutureBookings();
+        $pastBookings = $this->bookingRepository->findPastBookings();
+
 
         return $this->render('pages/admin/booking/index.html.twig', [
-            'bookings' => $bookings
-        ]);
-    }
-
-    #[Route('/booking/{id<\d+>}/edit', name: 'admin_booking_edit', methods: ['GET', 'POST'])]
-    public function edit(Booking $booking, Request $request): Response
-    {    
-        $form = $this->createForm(AdminBookingFormType::class, $booking);
-
-        $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $booking->setUpdatedAt(new DateTimeImmutable());
-
-            $this->em->persist($booking);
-            $this->em->flush();
-
-            $this->addFlash("success", "La réservation a été modifiée");
-
-            return $this->redirectToRoute("admin_booking_index");
-        }
-
-        return $this->render("pages/admin/booking/edit.html.twig", [
-            'booking' => $booking,
-            'form' => $form->createView()
+            'futureBookings' => $futureBookings,
+            'pastBookings' => $pastBookings
         ]);
     }
 

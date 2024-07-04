@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CourtRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -28,9 +29,12 @@ class Court
     )]
     #[ORM\Column]
     private ?int $courtNumber = null;
+    
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $unavailableFrom = null;
 
-    #[ORM\Column]
-    private ?bool $available = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $unavailableTo = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $createdAt = null;
@@ -43,6 +47,11 @@ class Court
      */
     #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'court', orphanRemoval: true)]
     private Collection $bookings;
+
+
+    public $start;
+    public $end;
+
 
     public function __construct()
     {
@@ -62,18 +71,6 @@ class Court
     public function setCourtNumber(?int $courtNumber): ?static
     {
         $this->courtNumber = $courtNumber;
-
-        return $this;
-    }
-
-    public function isAvailable(): ?bool
-    {
-        return $this->available;
-    }
-
-    public function setAvailable(bool $available): static
-    {
-        $this->available = $available;
 
         return $this;
     }
@@ -110,24 +107,27 @@ class Court
         return $this->bookings;
     }
 
-    public function addBooking(Booking $booking): static
+
+    public function getUnavailableFrom(): ?\DateTimeInterface
     {
-        if (!$this->bookings->contains($booking)) {
-            $this->bookings->add($booking);
-            $booking->setCourt($this);
-        }
+        return $this->unavailableFrom;
+    }
+
+    public function setUnavailableFrom(?\DateTimeInterface $unavailableFrom): static
+    {
+        $this->unavailableFrom = $unavailableFrom;
 
         return $this;
     }
 
-    public function removeBooking(Booking $booking): static
+    public function getUnavailableTo(): ?\DateTimeInterface
     {
-        if ($this->bookings->removeElement($booking)) {
-            // set the owning side to null (unless already changed)
-            if ($booking->getCourt() === $this) {
-                $booking->setCourt(null);
-            }
-        }
+        return $this->unavailableTo;
+    }
+
+    public function setUnavailableTo(?\DateTimeInterface $unavailableTo): static
+    {
+        $this->unavailableTo = $unavailableTo;
 
         return $this;
     }

@@ -39,7 +39,6 @@ class CourtController extends AbstractController
         $court = new Court();
 
         $court  ->setCourtNumber(\count($this->courtRepository->findAll()) + 1)
-                ->setAvailable(false)
                 ->setCreatedAt(new DateTimeImmutable())
                 ->setUpdatedAt(new DateTimeImmutable());
 
@@ -52,19 +51,6 @@ class CourtController extends AbstractController
         return $this->redirectToRoute('admin_court_index');
     }
 
-    #[Route('/court/{id<\d+>}/available}', name: 'admin_court_available', methods: ['GET', 'POST'])]
-    public function available(Court $court): Response
-    {
-        $court  ->setAvailable(!$court->isAvailable())
-                ->setUpdatedAt(new DateTimeImmutable());
-
-        $this->em->persist($court);
-        $this->em->flush();
-
-        $this->addFlash('success', "La disponibilité de la piste {$court->getCourtNumber()} a été modifée");
-        return $this->redirectToRoute('admin_court_index');
-    }
-
     #[Route('/court/{id<\d+>}/edit', name: 'admin_court_edit', methods: ['GET', 'POST'])]
     public function edit(Court $court, Request $request): Response
     {    
@@ -74,12 +60,15 @@ class CourtController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid())
         {
+            $court->setUnavailableFrom(new \DateTime($court->start));
+            $court->setUnavailableTo(new \DateTime($court->end));
+
             $court->setUpdatedAt(new DateTimeImmutable());
 
             $this->em->persist($court);
             $this->em->flush();
 
-            $this->addFlash("success", "Le numéro du court a été modifié");
+            $this->addFlash("success", "La piste a été modifiée");
 
             return $this->redirectToRoute("admin_court_index");
         }
@@ -102,6 +91,20 @@ class CourtController extends AbstractController
         }
 
         return $this->redirectToRoute("admin_court_index");
+    }
+
+    #[Route('/court/{id<\d+>}/available}', name: 'admin_court_available', methods: ['GET', 'POST'])]
+    public function available(Court $court): Response
+    {
+        $court  ->setUnavailableFrom(null)
+                ->setUnavailableTo(null)
+                ->setUpdatedAt(new DateTimeImmutable());
+
+        $this->em->persist($court);
+        $this->em->flush();
+
+        $this->addFlash('success', "La disponibilité de la piste {$court->getCourtNumber()} a été modifée");
+        return $this->redirectToRoute('admin_court_index');
     }
 
 }

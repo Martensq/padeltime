@@ -51,11 +51,39 @@ class BookingRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByUser($user)
+    public function findFutureBookingsByUser($user): array
     {
+        $now = new \DateTime();
+
         return $this->createQueryBuilder('b')
             ->andWhere('b.user = :user')
+            ->andWhere('b.startDate > :now')
             ->setParameter('user', $user)
+            ->setParameter('now', $now)
+            ->orderBy('b.startDate', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findFutureBookings(): array
+    {
+        $now = new \DateTime();
+    
+        return $this->createQueryBuilder('b')
+            ->where('b.startDate > :now')
+            ->setParameter('now', $now)
+            ->orderBy('b.startDate', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findPastBookings(): array
+    {
+        $now = new \DateTime();
+    
+        return $this->createQueryBuilder('b')
+            ->where('b.startDate < :now')
+            ->setParameter('now', $now)
             ->orderBy('b.startDate', 'ASC')
             ->getQuery()
             ->getResult();
