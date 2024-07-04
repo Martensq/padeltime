@@ -44,22 +44,25 @@
                     </div>
                 </div>
             </div>
+            
             <div class="card w-75 mx-auto mt-5">
                 <p class="card-header text_size_m bg-primary bg-opacity-25">Mes réservations</p>
                 <div class="row d-flex justify-content-center card-body pb-5">
-                    <p class="fst-italic">Pour modifier ou supprimer une réservation, appelez le {{setting.phone}}</p>
-                    {% for booking in bookings %}
-                        <div class="col-12 col-lg-4 card mt-5 mx-3 p-0 text-center">
-                            <div class="card-header pb-0">
-                                <p class="mt-2 text_size_s fw-normal">{{booking.startDate|date('l j F')}}</p>
-                            </div>
-                            <div class="row card-body p-4">
-                                <div>
+                    {% if bookings is empty %}
+                        Aucune réservation en cours.
+                    {% else %}
+                        <p class="fst-italic">Pour supprimer une réservation, appelez le {{setting.phone}}</p>
+                        {% for booking in bookings %}
+                            <div class="col-12 col-lg-4 card mt-5 mx-3 p-0 text-center">
+                                <div class="card-header pb-0">
+                                    <p class="mt-2 text_size_s fw-normal">{{booking.startDate|date('l j F')}}</p>
+                                </div>
+                                <div class="row card-body p-4">
                                     <p class="py-2 text_size_s fw-normal">{{booking.startDate|date('H')}}h00 - {{booking.startDate|date('H') + booking.duration}}h00</p>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         </div>

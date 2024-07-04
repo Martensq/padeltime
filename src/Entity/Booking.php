@@ -16,20 +16,9 @@ class Booking
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank(message: "L'horaire de début est obligatoire")]
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeImmutable $startDate = null;
 
-    #[Assert\NotBlank(message: "La durée est obligatoire")]
-    #[Assert\Length(
-        max: 1,
-        maxMessage: "Le numéro ne doit pas dépasser {{ limit }} chiffres.",
-    )]
-    #[Assert\Regex(
-        pattern: "/[1-2]+/",
-        match: true,
-        message: 'Seuls 1 et 2 sont autorisés.',
-    )]
     #[ORM\Column]
     private ?float $duration = null;
 

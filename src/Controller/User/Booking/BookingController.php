@@ -71,11 +71,26 @@ class BookingController extends AbstractController
         $offPeakHoursPrice = $this->settingRepository->find(4)->getOffPeakHoursPrice();
 
 
-        // Récupérer tous les terrains disponibles
-        $courts = $this->courtRepository->findBy(['available' => true]);
+        // Récupérer tous les terrains
+        $courts = $this->courtRepository->findAll();
+        
+        // Stocker les terrains disponibles
+        $unavailableCourts = 0;
+
+        // Vérifier si le terrain est disponible au jour donné
+        foreach ($courts as $court) {
+            $unavailableFrom = $court->getUnavailableFrom();
+            $unavailableTo = $court->getUnavailableTo();
+
+            if ($unavailableFrom && $unavailableTo) {
+                if (($unavailableFrom <= $date && $unavailableTo >= $date)) {
+                    $unavailableCourts++;
+                }
+            }
+        }
 
 
-        // Obtenir toutes les réservations pour la date
+        // Obtenir toutes les réservations en cours pour la date
         $bookingsForDay = $this->bookingRepository->findByDate($date);
 
 
@@ -109,21 +124,20 @@ class BookingController extends AbstractController
 
             // Récupérer les réservations de l'heure précédente, ou un tableau vide si aucune réservation n'existe
             $previousHourBookings = $bookingSlot[$hour - 1] ?? [];
-            $twoHourBookingsPreviousHour = 0;
+            $twoHoursBookingsPreviousHour = 0;
 
             // Vérifier s'il y a des réservations de 2 heures qui affectent l'heure actuelle
             foreach ($previousHourBookings as $previousHourBooking) {
                 $bookingDuration = $previousHourBooking->getDuration();
                 
-                
                 // Si la réservation dure 2 heures, ajoute 1 à la variable $twoHourBookingsPreviousHour
                 if ($bookingDuration == 2) {
-                    $twoHourBookingsPreviousHour++;
+                    $twoHoursBookingsPreviousHour++;
                 }
             }
 
             // Calculer les terrains disponibles en tenant compte des réservations des heures courantes et précédentes
-            $availableCourts = count($courts) - count($bookingSlot[$hour] ?? []) - $twoHourBookingsPreviousHour;
+            $availableCourts = count($courts) - $unavailableCourts - count($bookingSlot[$hour] ?? []) - $twoHoursBookingsPreviousHour;
 
             // S'il y a des terrains disponibles, générer des créneaux pour cette heure
             if ($availableCourts > 0) {
@@ -137,8 +151,22 @@ class BookingController extends AbstractController
                 // Déterminer les durées disponibles pour les réservations
                 for ($duration = 1; $duration <= $maxDuration; $duration += $durationStep) {
                     $endTime = (clone $date)->setTime($hour+$duration, 0);
+
+                    $currentHourBookings = $bookingSlot[$hour] ?? [];
+                    $twoHoursBookingsCurrentHour = 0;
+        
+                    // Vérifier s'il y a des réservations de 2 heures qui affectent l'heure suivante
+                    foreach ($currentHourBookings as $currentHourBooking) {
+                        $bookingDuration = $currentHourBooking->getDuration();
+                        
+                        // Si la réservation dure 2 heures, ajoute 1 à la variable $twoHoursBookingsCurrentHour
+                        if ($bookingDuration == 2) {
+                            $twoHoursBookingsCurrentHour++;
+                        }
+                    }
+
                     if ($duration == $maxDuration) {
-                        if (count($bookingSlot[$endTime->format('H') - 1] ?? []) < $availableCourts )
+                        if (count($bookingSlot[$endTime->format('H') - 1] ?? []) < count($courts) - $unavailableCourts - $twoHoursBookingsCurrentHour)
                         {
                             $availableDurations[] = $duration;
                             $price[] = $pricePerHour * $duration;

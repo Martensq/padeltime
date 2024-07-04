@@ -6,7 +6,6 @@
 
 {% block keywords %}admin, modification, piste{% endblock %}
 
-
 {% block main %}
     <h1 class="text-center my-3 display-5">Modifier la piste {{court.courtNumber}}</h1>
 
@@ -20,11 +19,48 @@
                         <div class="text-danger">{{ form_errors(form.courtNumber) }}</div>
                     </div>
                     <div class="mb-3">
+                        <label for="admin_category_form_unavailableTo">Période d'indisponibilité</label>
+                        <input id="admin_category_form_unavailableTo" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
                         <input formnovalidate type="submit" class="btn btn-primary shadow" value="Modifier">
                     </div>
                 {{ form_end(form) }}
             </div>
         </div>
     </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <script>
+        $(function() {
+            let start = moment().add(15, 'days');
+            let end = moment().add(22, 'days');
+
+            $('#admin_category_form_unavailableTo').daterangepicker({
+                opens: 'center',
+                startDate: start,
+                endDate: end,
+                locale: {
+                    format: 'DD/MM/YYYY'
+                }
+            }, function(start, end, label) {
+                let unavailableFrom = $('#admin_court_form_start')
+                let unavailableTo = $('#admin_court_form_end')
+                unavailableFrom.val(start.format('YYYY-MM-DD'))
+                unavailableTo.val(end.format('YYYY-MM-DD'))
+            });
+        });
+    </script>
+    
 
 {% endblock %}
