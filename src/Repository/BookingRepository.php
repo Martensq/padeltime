@@ -41,49 +41,32 @@ class BookingRepository extends ServiceEntityRepository
     //        ;
     //    }
     
-
-    public function findByDate($date)
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.startDate LIKE :date')
-            ->setParameter('date', $date->format('Y-m-d') . '%')
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findFutureBookingsByUser($user): array
-    {
-        $now = new \DateTime();
-
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.user = :user')
-            ->andWhere('b.startDate > :now')
-            ->setParameter('user', $user)
-            ->setParameter('now', $now)
-            ->orderBy('b.startDate', 'ASC')
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findFutureBookings(): array
-    {
-        $now = new \DateTime();
     
-        return $this->createQueryBuilder('b')
-            ->where('b.startDate > :now')
-            ->setParameter('now', $now)
-            ->orderBy('b.startDate', 'ASC')
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findPastBookings(): array
+    public function findBookingsByDate($date = null, $current = true, $user = null): array
     {
         $now = new \DateTime();
+        $qb = $this->createQueryBuilder('b');
     
-        return $this->createQueryBuilder('b')
-            ->where('b.startDate < :now')
-            ->setParameter('now', $now)
+        if ($date) {
+            $qb->where('b.startDate LIKE :date')
+               ->setParameter('date', $date->format('Y-m-d') . '%');
+        }
+    
+        if ($user) {
+            $qb->andWhere('b.user = :user')
+               ->setParameter('user', $user);
+        }
+    
+        // Filtrer les réservations futures ou passées
+        if ($current) {
+            $qb->andWhere('b.startDate > :now')
+               ->setParameter('now', $now);
+        } else {
+            $qb->andWhere('b.startDate < :now')
+               ->setParameter('now', $now);
+        }
+    
+        return $qb
             ->orderBy('b.startDate', 'ASC')
             ->getQuery()
             ->getResult();

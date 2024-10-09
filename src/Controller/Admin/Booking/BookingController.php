@@ -25,8 +25,8 @@ class BookingController extends AbstractController
     #[Route('/booking/list', name: 'admin_booking_index')]
     public function index(): Response
     {
-        $futureBookings = $this->bookingRepository->findFutureBookings();
-        $pastBookings = $this->bookingRepository->findPastBookings();
+        $futureBookings = $this->bookingRepository->findBookingsByDate(null, true);
+        $pastBookings = $this->bookingRepository->findBookingsByDate(null, false);
 
 
         return $this->render('pages/admin/booking/index.html.twig', [

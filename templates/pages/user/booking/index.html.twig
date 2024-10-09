@@ -14,16 +14,22 @@
 
             {% include 'components/_alert.html.twig' %}
 
-            <div class="row d-flex justify-content-center">
+            <div id="wrapper" class="">
                 {% for day in days %}
-                    <a 
+                    <a
+                        id="slot"
                         class="col-3 col-md-2 me-1 mb-1 btn btn-light"
                         href="{{path('user_booking_index', {'annee' : day|date("Y"), 'mois' : day|date("m"), 'jour' : day|date("d")})}}"
-                    >{{ day|date('D j M', 'Europe/Paris', 'fr') }}</a>
+                    >
+                        {{ day|date('D j M', 'Europe/Paris', 'fr') }}
+                    </a>
                 {% endfor %}
             </div>
+                
 
-            {% if noSlotsAvailable %}
+            <h2 class="text-center text-white mt-4">{{ selectedDay|date('l j F', 'Europe/Paris', 'fr') }}</h2>
+
+            {% if slotsForDay is empty %}
                 <div class="d-flex justify-content-center align-items-center text-white my-5 py-5">
                     <p class="my-5">Aucune piste disponible</p>
                 </div>

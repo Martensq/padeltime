@@ -38,6 +38,7 @@
                     <th>Date et heure</th>
                     <th>Durée</th>
                     <th>Prix</th>
+                    <th>Piste</th>
                     <th>Créée le</th>
                     <th>Modifiée le</th>
                     <th>Options</th>
@@ -54,6 +55,7 @@
                         </td>
                         <td>{{booking.duration}}h</td>
                         <td>{{booking.price}}€</td>
+                        <td>{{booking.court.courtNumber}}</td>
                         <td>{{booking.createdAt|date()}}</td>
                         <td>{{booking.updatedAt|date()}}</td>
                         <td> 
@@ -81,6 +83,7 @@
                     <th>Date et heure</th>
                     <th>Durée</th>
                     <th>Prix</th>
+                    <th>Piste</th>
                     <th>Créée le</th>
                     <th>Modifiée le</th>
                 </tr>
@@ -96,6 +99,7 @@
                         </td>
                         <td>{{booking.duration}}h</td>
                         <td>{{booking.price}}€</td>
+                        <td>{{booking.court.courtNumber}}</td>
                         <td>{{booking.createdAt|date()}}</td>
                         <td>{{booking.updatedAt|date()}}</td>
                     </tr>
