@@ -29,7 +29,7 @@
         {# My CSS #}
         <link rel="stylesheet" href="{{ asset('style/style.css') }}">
     </head>
-    <body class="">
+    <body>
 
         {# Navbar #}
         <nav class="navbar navbar-expand-lg text_size_s">
@@ -43,7 +43,7 @@
                 </button>
                 
                 <!-- Contenu du burger -->
-                <div class="collapse navbar-collapse poppins-regular" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Menu -->
                     <ul class="navbar-nav mx-auto d-flex">
                         <li class="nav-item dropdown pe-5 fw-normal">
@@ -71,18 +71,18 @@
                         {% if app.user %}
                             <div class="d-flex align-items-end">
                             {% if is_granted('ROLE_ADMIN') %}
-                                <a class="pe-3" href="{{path('admin_home')}}"><img src="/logos/cadenas.png" width="40" alt=""></a>
+                                <a class="pe-3" href="{{path('admin_home')}}"><img src="/logos/cadenas.png" width="40" alt="Lien vers le dashboard"></a>
                             {% endif %}
-                                <a class="pe-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="/logos/utilisateur.png" width="40" alt=""></a>
+                                <a class="pe-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="/logos/utilisateur.png" width="40" alt="Lien vers la gestion du profil"></a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{path('user_myProfile_index')}}">Mon profil</a></li>
                                     <li><a class="dropdown-item" href="{{path('app_logout')}}">Déconnexion</a></li>
                                 </ul>
-                                <a href="{{path('user_booking_index', {'annee' : "now"|date("Y"), 'mois' : "now"|date("m"), 'jour' : "now"|date("d")})}}"><img src="/logos/reservation_bleu.png" width="50" alt=""></a>
+                                <a href="{{path('user_booking_index', {'annee' : "now"|date("Y"), 'mois' : "now"|date("m"), 'jour' : "now"|date("d")})}}"><img src="/logos/reservation_bleu.png" width="50" alt="Lien vers le calendrier de réservations"></a>
                             </div>
                         {% else %}
                             <div class="d-flex align-items-end">
-                                <a class="pe-4" href="{{path('visitor_authentication_login')}}" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="/logos/utilisateur.png" width="40" alt=""></a>
+                                <a class="pe-4" href="{{path('visitor_authentication_login')}}" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="/logos/utilisateur.png" width="40" alt="Lien vers la connexion"></a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{path('visitor_authentication_login')}}">Connexion</a></li>
                                     <li><a class="dropdown-item" href="{{path('visitor_registration_register')}}">Inscription</a></li>
@@ -130,6 +130,9 @@
         </section>
 
         {# JS part of Bootstrap 5 #}
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous">
+        </script>
     </body>
 </html>

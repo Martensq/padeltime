@@ -42,15 +42,14 @@ class Court
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    public $start;
+    public $end;
+
     /**
      * @var Collection<int, Booking>
      */
-    #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'court', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'court')]
     private Collection $bookings;
-
-
-    public $start;
-    public $end;
 
 
     public function __construct()
@@ -99,15 +98,6 @@ class Court
         return $this;
     }
 
-    /**
-     * @return Collection<int, Booking>
-     */
-    public function getBookings(): Collection
-    {
-        return $this->bookings;
-    }
-
-
     public function getUnavailableFrom(): ?\DateTimeInterface
     {
         return $this->unavailableFrom;
@@ -128,6 +118,36 @@ class Court
     public function setUnavailableTo(?\DateTimeInterface $unavailableTo): static
     {
         $this->unavailableTo = $unavailableTo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Booking>
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): static
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings->add($booking);
+            $booking->setCourt($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Booking $booking): static
+    {
+        if ($this->bookings->removeElement($booking)) {
+            // set the owning side to null (unless already changed)
+            if ($booking->getCourt() === $this) {
+                $booking->setCourt(null);
+            }
+        }
 
         return $this;
     }

@@ -79,11 +79,12 @@ class CourtController extends AbstractController
         ]);
     }
 
-    #[Route('/court/{id<\d+>}/delete}', name: 'admin_court_delete', methods: ['POST'])]
+    #[Route('/court/{id<\d+>}/delete', name: 'admin_court_delete', methods: ['POST'])]
     public function delete(Court $court, Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete_court_'.$court->getId(), $request->request->get('_csrf_token')))
         {
+            
             $this->addFlash('success', "La piste {$court->getCourtNumber()} a été supprimée");
             
             $this->em->remove($court);

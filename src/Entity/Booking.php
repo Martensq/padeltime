@@ -35,7 +35,9 @@ class Booking
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-
+    #[ORM\ManyToOne(inversedBy: 'bookings')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Court $court = null;
 
     public function getId(): ?int
     {
@@ -115,6 +117,18 @@ class Booking
     public function setPrice(float $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getCourt(): ?Court
+    {
+        return $this->court;
+    }
+
+    public function setCourt(?Court $court): static
+    {
+        $this->court = $court;
 
         return $this;
     }

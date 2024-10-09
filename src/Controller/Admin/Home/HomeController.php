@@ -27,7 +27,7 @@ class HomeController extends AbstractController
             "courts" => $courtRepository->findAll(),
             "contacts" => $contactRepository->findAll(),
             "users" => $userRepository->findAll(),
-            "bookings" => $bookingRepository->findFutureBookings(),
+            "bookings" => $bookingRepository->findBookingsByDate(null, true),
             "setting" => $settingRepository->find(4)
         ]);
     }

@@ -34,7 +34,6 @@ class BookingController extends AbstractController
         $this->em = $em;
     }
 
-
     private function getNextFifteenDays(): array
     {
         $days = [];
@@ -47,7 +46,6 @@ class BookingController extends AbstractController
         return $days;
     }
 
-
     private function dateExistsInArray(DateTimeImmutable $dateTime, array $nextFifteenDays): bool
     {
         $formattedDate = $dateTime->format('Y-m-d');
@@ -59,6 +57,57 @@ class BookingController extends AbstractController
         return false;
     }
 
+    private function getUnavailableCourts(DateTimeImmutable $date, array $courts): array
+    {
+        $unavailableCourts = [];
+    
+        foreach ($courts as $court) {
+            $unavailableFrom = $court->getUnavailableFrom();
+            $unavailableTo = $court->getUnavailableTo();
+    
+            if ($unavailableFrom && $unavailableTo) {
+                if (($unavailableFrom <= $date && $unavailableTo >= $date)) {
+                    $unavailableCourts[] = $court;
+                }
+            }
+        }
+    
+        return $unavailableCourts;
+    }
+
+    private function getCurrentHour(DateTimeImmutable $date): ?int
+    {
+        $today = new DateTimeImmutable();
+        return ($date->format('Y-m-d') === $today->format('Y-m-d')) ? $today->format('H') : null;
+    }
+
+    private function getTwoHourBookingsForPreviousHour(array $previousHourBookings): int
+    {
+        $twoHoursBookingsPreviousHour = 0;
+
+        foreach ($previousHourBookings as $previousHourBooking) {
+            $bookingDuration = $previousHourBooking->getDuration();
+            if ($bookingDuration == 2) {
+                $twoHoursBookingsPreviousHour++;
+            }
+        }
+
+        return $twoHoursBookingsPreviousHour;
+    }
+
+    private function getTwoHourBookingsForCurrentHour(array $currentHourBookings): int
+    {
+        $twoHoursBookingsCurrentHour = 0;
+
+        foreach ($currentHourBookings as $currentHourBooking) {
+            $bookingDuration = $currentHourBooking->getDuration();
+            if ($bookingDuration == 2) {
+                $twoHoursBookingsCurrentHour++;
+            }
+        }
+
+        return $twoHoursBookingsCurrentHour;
+    }
 
     private function generateSlotsForDay(DateTimeImmutable $date): array
     {
@@ -70,33 +119,17 @@ class BookingController extends AbstractController
         $peakHoursPrice = $this->settingRepository->find(4)->getPeakHoursPrice();
         $offPeakHoursPrice = $this->settingRepository->find(4)->getOffPeakHoursPrice();
 
-
         // Récupérer tous les terrains
         $courts = $this->courtRepository->findAll();
-        
-        // Stocker les terrains disponibles
-        $unavailableCourts = 0;
 
-        // Vérifier si le terrain est disponible au jour donné
-        foreach ($courts as $court) {
-            $unavailableFrom = $court->getUnavailableFrom();
-            $unavailableTo = $court->getUnavailableTo();
-
-            if ($unavailableFrom && $unavailableTo) {
-                if (($unavailableFrom <= $date && $unavailableTo >= $date)) {
-                    $unavailableCourts++;
-                }
-            }
-        }
-
+        // Récupérer le nombre de terrains en période d'indisponibilité
+        $unavailableCourts = count($this->getUnavailableCourts($date, $courts));
 
         // Obtenir toutes les réservations en cours pour la date
-        $bookingsForDay = $this->bookingRepository->findByDate($date);
-
+        $bookingsForDay = $this->bookingRepository->findBookingsByDate($date);
 
         // Initialiser le tableau des créneaux de réservation
         $bookingSlot = [];
-
 
         // Regrouper les réservations par heure de début
         foreach ($bookingsForDay as $booking) {
@@ -106,38 +139,22 @@ class BookingController extends AbstractController
         }
         
 
-        // Récupérer l'heure actuelle si la date est aujourd'hui
-        $currentHour = null;
-        $today = new DateTimeImmutable();
-        if ($date->format('Y-m-d') === $today->format('Y-m-d')) {
-            $currentHour = $today->format('H');
-        }
-        
-
         // Boucler à travers chaque heure dans la plage horaire
         for ($hour = $startHour; $hour < $endHour; $hour+=$slotHourStep) {
-
             // Ignorer les heures déjà passées si la date est aujourd'hui
-            if ($currentHour !== null && $hour <= $currentHour) {
+            if ($this->getCurrentHour($date) !== null && $hour <= $this->getCurrentHour($date)) {
                 continue;
             }
 
             // Récupérer les réservations de l'heure précédente, ou un tableau vide si aucune réservation n'existe
             $previousHourBookings = $bookingSlot[$hour - 1] ?? [];
-            $twoHoursBookingsPreviousHour = 0;
+            $twoHoursBookingsPreviousHour = $this->getTwoHourBookingsForPreviousHour($previousHourBookings);
 
-            // Vérifier s'il y a des réservations de 2 heures qui affectent l'heure actuelle
-            foreach ($previousHourBookings as $previousHourBooking) {
-                $bookingDuration = $previousHourBooking->getDuration();
-                
-                // Si la réservation dure 2 heures, ajoute 1 à la variable $twoHourBookingsPreviousHour
-                if ($bookingDuration == 2) {
-                    $twoHoursBookingsPreviousHour++;
-                }
-            }
+            // Récupérer les réservations de l'heure actuelle, ou un tableau vide si aucune réservation n'existe
+            $currentHourBookings = $bookingSlot[$hour] ?? [];
 
-            // Calculer les terrains disponibles en tenant compte des réservations des heures courantes et précédentes
-            $availableCourts = count($courts) - $unavailableCourts - count($bookingSlot[$hour] ?? []) - $twoHoursBookingsPreviousHour;
+            // Calculer les terrains disponibles en tenant compte des réservations des heures courantes et précédentes et des terrains indisponibles
+            $availableCourts = count($courts) - $unavailableCourts - count($currentHourBookings) - $twoHoursBookingsPreviousHour;
 
             // S'il y a des terrains disponibles, générer des créneaux pour cette heure
             if ($availableCourts > 0) {
@@ -147,27 +164,14 @@ class BookingController extends AbstractController
                 $pricePerHour = $isWeekend || $hour > 17 ? $peakHoursPrice : $offPeakHoursPrice;
                 $price = [];
                 $startTime = (clone $date)->setTime($hour, 0);
-                
+
                 // Déterminer les durées disponibles pour les réservations
                 for ($duration = 1; $duration <= $maxDuration; $duration += $durationStep) {
-                    $endTime = (clone $date)->setTime($hour+$duration, 0);
-
-                    $currentHourBookings = $bookingSlot[$hour] ?? [];
-                    $twoHoursBookingsCurrentHour = 0;
-        
-                    // Vérifier s'il y a des réservations de 2 heures qui affectent l'heure suivante
-                    foreach ($currentHourBookings as $currentHourBooking) {
-                        $bookingDuration = $currentHourBooking->getDuration();
-                        
-                        // Si la réservation dure 2 heures, ajoute 1 à la variable $twoHoursBookingsCurrentHour
-                        if ($bookingDuration == 2) {
-                            $twoHoursBookingsCurrentHour++;
-                        }
-                    }
-
                     if ($duration == $maxDuration) {
-                        if (count($bookingSlot[$endTime->format('H') - 1] ?? []) < count($courts) - $unavailableCourts - $twoHoursBookingsCurrentHour)
-                        {
+                        // Récupère les réservations de 2h uniquement 
+                        $twoHoursBookingsCurrentHour = $this->getTwoHourBookingsForCurrentHour($currentHourBookings);
+                        
+                        if (count($bookingSlot[$hour + 1] ?? []) < count($courts) - $unavailableCourts - $twoHoursBookingsCurrentHour) {
                             $availableDurations[] = $duration;
                             $price[] = $pricePerHour * $duration;
                         }
@@ -175,8 +179,8 @@ class BookingController extends AbstractController
                         $availableDurations[] = $duration;
                         $price[] = $pricePerHour * $duration;
                     }
-                }
 
+                }
                 // Ajouter le créneau au tableau
                 $slots[$hour] = [
                     'startTime' => $startTime,
@@ -208,26 +212,27 @@ class BookingController extends AbstractController
         }
 
         // Générer les créneaux pour le jour spécifié
-        $slotsForDay = $this->generateSlotsForDay($dateRecup);
-
-        // Vérifier s'il y a des créneaux disponibles
-        $noSlotsAvailable = empty($slotsForDay);
-        
+        $slotsForDay = $this->generateSlotsForDay($dateRecup);        
 
         return $this->render('pages/user/booking/index.html.twig', [
             'days' => $dates,
+            'selectedDay' => $dateRecup,
             'slotsForDay' => $slotsForDay,
-            'noSlotsAvailable' => $noSlotsAvailable,
             'setting' => $this->settingRepository->find(4)
         ]);
     }
 
-    #[Route('/reservation/confirmation/{annee}/{mois}/{jour}/{heure}/{duree}/{price}', name: 'user_booking_confirm')]
-    public function newBookingConfirm($annee, $mois, $jour, $heure, $duree, $price): Response
+
+    #[Route('/reservation/confirmation/{annee}/{mois}/{jour}/{heure}/{duree}', name: 'user_booking_confirm')]
+    public function newBookingConfirm($annee, $mois, $jour, $heure, $duree): Response
     {
         // Créer un objet DateTimeImmutable à partir des paramètres de date et heure
         $date = new DateTimeImmutable("$annee-$mois-$jour $heure:00");
+        $court = $this->courtRepository->findAvailableCourtForHour($date, $heure, $duree);
         $slotsForDay = $this->generateSlotsForDay($date);
+        $selectedSlot = $slotsForDay[$heure];
+
+        $price = $selectedSlot['price'][array_search($duree, $selectedSlot['durations'])];
 
         // Vérifier si le créneau demandé existe dans les créneaux générés
         if (!isset($slotsForDay[$heure]) || !in_array($duree, $slotsForDay[$heure]['durations'])) {
@@ -242,6 +247,7 @@ class BookingController extends AbstractController
             'date' => $date,
             'duree' => $duree,
             'price' => $price,
+            'court' => $court,
             'setting' => $this->settingRepository->find(4)
         ]);
     }
@@ -251,13 +257,26 @@ class BookingController extends AbstractController
     {
         // Créer un objet DateTimeImmutable à partir des paramètres de date et heure
         $date = new DateTimeImmutable("$annee-$mois-$jour $heure:00");
+        $slotsForDay = $this->generateSlotsForDay($date);
 
-        // // Créer une nouvelle réservation et la sauvegarder en base de données
+        // Vérifier si le créneau demandé existe dans les créneaux générés
+        if (!isset($slotsForDay[$heure]) || !in_array($duree, $slotsForDay[$heure]['durations'])) {
+            return $this->redirectToRoute('user_booking_index', [
+                'annee' => date('Y'),
+                'mois' => date('m'),
+                'jour' => date('d'),
+            ]);
+        }
+
+        // Récupérer le court disponible pour l'heure et la durée sélectionnée
+        $availableCourt = $this->courtRepository->findAvailableCourtForHour($date, $heure, $duree);
+
+        // Créer une nouvelle réservation avec le court disponible trouvé
         $booking = new Booking();
-
         $booking->setStartDate($date)
                 ->setDuration($duree)
                 ->setPrice($price)
+                ->setCourt($availableCourt)
                 ->setUser($this->getUser())
                 ->setCreatedAt(new DateTimeImmutable())
                 ->setUpdatedAt(new DateTimeImmutable());
@@ -265,10 +284,8 @@ class BookingController extends AbstractController
         $this->em->persist($booking);
         $this->em->flush();
 
-        $this->addFlash("success", "La réservation a été confirmée");
+        $this->addFlash("success", "La réservation a été confirmée sur la piste " . $availableCourt->getCourtNumber());
 
-
-        // Rediriger vers une page de confirmation ou d'accueil
         return $this->redirectToRoute('user_booking_index', [
             'annee' => date($annee),
             'mois' => date($mois),

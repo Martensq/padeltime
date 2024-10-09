@@ -53,6 +53,12 @@
     padding: 180px 0 180px 0;
 }
 
+
+.card_size {
+    min-width: 300px;
+    min-height: 300px;
+}
+
 .img_accueil {
     background-image: url("/images/photo_accueil1.png");
     height: 800px;
@@ -62,7 +68,24 @@
     background-attachment: fixed;
 }
 
-.card_size {
-    min-width: 300px;
-    min-height: 300px;
+#wrapper {
+    max-height: 100px;
+    display: flex;
+    overflow-x: auto;
+}
+
+#wrapper::-webkit-scrollbar {
+    width: 0;
+    height: 12px;
+    background-color: #ddd;
+}
+
+#wrapper::-webkit-scrollbar-thumb {
+    background: #aaa;
+}
+  
+#slot {
+    min-width: 120px;
+    height: 80px;
+    line-height: 80px;
 }
