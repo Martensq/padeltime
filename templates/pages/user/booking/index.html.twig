@@ -35,8 +35,8 @@
                 </div>
             {% else %}
                 <div class="row d-flex justify-content-center mt-5">
-                    {% for slot in slotsForDay %}
-                        {% include 'components/_booking_slot.html.twig' %}
+                    {% for hour, slot in slotsForDay %}
+                        {% include 'components/_booking_slot.html.twig' with { hour: hour, slot: slot } %}
                     {% endfor %}
                 </div>
             {% endif %}

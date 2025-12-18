@@ -22,7 +22,9 @@
                     </div>
                     <div>
                         <span class="text_size_xs">Créneau :</span>
-                        <p class="py-2 text_size_s fw-normal">{{date|date('H')}}h00 - {{date|date('H') + duree}}h00 (Piste {{court.courtNumber}})</p>
+                        <p class="py-2 text_size_s fw-normal">
+                            {{ heure }}h00 - {{ heure + duree }}h00 (Piste {{ court.courtNumber }})
+                        </p>
                     </div>
                     <div>
                         <span class="text_size_xs">Prix :</span>
@@ -30,7 +32,16 @@
                     </div>
                     <div class="d-md-flex">
                         <div class="me-md-2">
-                            <a href="{{path('user_booking_create', {'annee' : date|date("Y"), 'mois' : date|date("m"), 'jour' : date|date("d"), 'heure' : date|date("H"), 'duree' : duree, 'price' : price})}}" class="btn btn-primary my-2">Confirmer la réservation</a>
+                            <a href="{{ path('user_booking_create', {
+                                'annee' : date|date('Y', 'Europe/Paris'),
+                                'mois'  : date|date('m', 'Europe/Paris'),
+                                'jour'  : date|date('d', 'Europe/Paris'),
+                                'heure' : heure,
+                                'duree' : duree,
+                                'price' : price
+                            }) }}" class="btn btn-primary my-2">
+                                Confirmer la réservation
+                            </a>
                         </div>
                         <div class="me-md-2">
                             <a href="{{path('user_booking_index', {'annee' : date|date("Y"), 'mois' : date|date("m"), 'jour' : date|date("d")})}}" class="btn btn-danger my-2">Annuler</a>

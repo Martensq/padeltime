@@ -13,7 +13,7 @@ class LePadelController extends AbstractController
     public function index(SettingRepository $settingRepository): Response
     {
         return $this->render('pages/visitor/le_padel/index.html.twig', [
-            'setting' => $settingRepository->find(4)
+            'setting' => $settingRepository->findOneBy([])
         ]);
     }
 }

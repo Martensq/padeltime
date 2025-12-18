@@ -31,7 +31,7 @@ class MyProfileController extends AbstractController
         $bookings = $this->bookingRepository->findBookingsByDate(null, true, $this->getUser());
 
         return $this->render('pages/user/my_profile/index.html.twig', [
-            'setting' => $this->settingRepository->find(4),
+            'setting' => $this->settingRepository->findOneBy([]),
             'bookings' => $bookings
         ]);
     }
@@ -57,7 +57,7 @@ class MyProfileController extends AbstractController
 
         return $this->render("pages/user/my_profile/edit_profile.html.twig", [
             'form' => $form->createView(),
-            'setting' => $this->settingRepository->find(4)
+            'setting' => $this->settingRepository->findOneBy([])
         ]);
     }
 
@@ -88,7 +88,7 @@ class MyProfileController extends AbstractController
 
         return $this->render("pages/user/my_profile/edit_password.html.twig", [
             'form' => $form->createView(),
-            'setting' => $this->settingRepository->find(4)
+            'setting' => $this->settingRepository->findOneBy([])
         ]);
     }
 

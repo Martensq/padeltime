@@ -116,8 +116,8 @@ class BookingController extends AbstractController
         $startHour = 10;
         $endHour = $isWeekend ? 23 : 21;
         $slotHourStep = 1;
-        $peakHoursPrice = $this->settingRepository->find(4)->getPeakHoursPrice();
-        $offPeakHoursPrice = $this->settingRepository->find(4)->getOffPeakHoursPrice();
+        $peakHoursPrice = $this->settingRepository->findOneBy([])->getPeakHoursPrice();
+        $offPeakHoursPrice = $this->settingRepository->findOneBy([])->getOffPeakHoursPrice();
 
         // Récupérer tous les terrains
         $courts = $this->courtRepository->findAll();
@@ -197,7 +197,12 @@ class BookingController extends AbstractController
     public function index($annee, $mois, $jour): Response
     {
         // Récupérer la date à partir des paramètres de l'URL
-        $dateRecup = new DateTimeImmutable($annee . '-' . $mois . '-' . $jour);
+        $tz = new \DateTimeZone('Europe/Paris');
+        $dateRecup = \DateTimeImmutable::createFromFormat('Y-m-d H:i', "$annee-$mois-$jour 00:00", $tz);
+
+        if ($dateRecup === false) {
+            throw $this->createNotFoundException('Date invalide');
+        }
 
         // Récupère les quinze prochains jours à partir de la date actuelle.
         $dates = $this->getNextFifteenDays();
@@ -218,7 +223,7 @@ class BookingController extends AbstractController
             'days' => $dates,
             'selectedDay' => $dateRecup,
             'slotsForDay' => $slotsForDay,
-            'setting' => $this->settingRepository->find(4)
+            'setting' => $this->settingRepository->findOneBy([])
         ]);
     }
 
@@ -226,15 +231,25 @@ class BookingController extends AbstractController
     #[Route('/reservation/confirmation/{annee}/{mois}/{jour}/{heure}/{duree}', name: 'user_booking_confirm')]
     public function newBookingConfirm($annee, $mois, $jour, $heure, $duree): Response
     {
-        // Créer un objet DateTimeImmutable à partir des paramètres de date et heure
-        $date = new DateTimeImmutable("$annee-$mois-$jour $heure:00");
+        $tz = new \DateTimeZone('Europe/Paris');
+
+        $date = \DateTimeImmutable::createFromFormat(
+            'Y-m-d H:i',
+            sprintf('%04d-%02d-%02d %02d:00', $annee, $mois, $jour, $heure),
+            $tz
+        );
+
+        if ($date === false) {
+            return $this->redirectToRoute('user_booking_index', [
+                'annee' => date('Y'),
+                'mois' => date('m'),
+                'jour' => date('d'),
+            ]);
+        }
+
         $court = $this->courtRepository->findAvailableCourtForHour($date, $heure, $duree);
         $slotsForDay = $this->generateSlotsForDay($date);
-        $selectedSlot = $slotsForDay[$heure];
 
-        $price = $selectedSlot['price'][array_search($duree, $selectedSlot['durations'])];
-
-        // Vérifier si le créneau demandé existe dans les créneaux générés
         if (!isset($slotsForDay[$heure]) || !in_array($duree, $slotsForDay[$heure]['durations'])) {
             return $this->redirectToRoute('user_booking_index', [
                 'annee' => date('Y'),
@@ -243,20 +258,40 @@ class BookingController extends AbstractController
             ]);
         }
 
+        $selectedSlot = $slotsForDay[$heure];
+        $price = $selectedSlot['price'][array_search($duree, $selectedSlot['durations'])];
+
         return $this->render("pages/user/booking/confirm.html.twig", [
             'date' => $date,
-            'duree' => $duree,
+            'heure' => (int) $heure,     // ✅ on passe l'heure explicitement
+            'duree' => (int) $duree,
             'price' => $price,
             'court' => $court,
-            'setting' => $this->settingRepository->find(4)
+            'setting' => $this->settingRepository->findOneBy([])
         ]);
     }
     
     #[Route('/reservation/nouvelle/{annee}/{mois}/{jour}/{heure}/{duree}/{price}', name: 'user_booking_create')]
     public function create($annee, $mois, $jour, $heure, $duree, $price): Response
     {
+        $tz = new \DateTimeZone('Europe/Paris');
+        $now = new \DateTimeImmutable('now', $tz);
         // Créer un objet DateTimeImmutable à partir des paramètres de date et heure
-        $date = new DateTimeImmutable("$annee-$mois-$jour $heure:00");
+        $date = \DateTimeImmutable::createFromFormat(
+            'Y-m-d H:i',
+            sprintf('%04d-%02d-%02d %02d:00', $annee, $mois, $jour, $heure),
+            $tz
+        );
+
+        if ($date === false) {
+            // fallback propre si parsing impossible
+            return $this->redirectToRoute('user_booking_index', [
+                'annee' => date('Y'),
+                'mois' => date('m'),
+                'jour' => date('d'),
+            ]);
+        }
+
         $slotsForDay = $this->generateSlotsForDay($date);
 
         // Vérifier si le créneau demandé existe dans les créneaux générés
@@ -278,8 +313,8 @@ class BookingController extends AbstractController
                 ->setPrice($price)
                 ->setCourt($availableCourt)
                 ->setUser($this->getUser())
-                ->setCreatedAt(new DateTimeImmutable())
-                ->setUpdatedAt(new DateTimeImmutable());
+                ->setCreatedAt($now)
+                ->setUpdatedAt($now);
 
         $this->em->persist($booking);
         $this->em->flush();
@@ -287,9 +322,9 @@ class BookingController extends AbstractController
         $this->addFlash("success", "La réservation a été confirmée sur la piste " . $availableCourt->getCourtNumber());
 
         return $this->redirectToRoute('user_booking_index', [
-            'annee' => date($annee),
-            'mois' => date($mois),
-            'jour' => date($jour)
+            'annee' => $annee,
+            'mois' => $mois,
+            'jour' => $jour
         ]);
     }
 }

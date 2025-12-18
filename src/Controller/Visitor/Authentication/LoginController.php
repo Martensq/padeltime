@@ -30,7 +30,7 @@ class LoginController extends AbstractController
         return $this->render('pages/visitor/authentication/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
-            'setting' => $settingRepository->find(4)
+            'setting' => $settingRepository->findOneBy([])
         ]);
     }
 

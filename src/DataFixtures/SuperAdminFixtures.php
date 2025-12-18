@@ -33,13 +33,13 @@ class SuperAdminFixtures extends Fixture
     {
         $superAdmin = new User();
 
-        $passwordHashed = $this->hasher->hashPassword($superAdmin, "Jucmsg5714!!");
+        $passwordHashed = $this->hasher->hashPassword($superAdmin, "Padeltime1");
 
         $superAdmin 
-                    ->setFirstName("Quentin")
-                    ->setLastName("Martens")
-                    ->setEmail("quentin.martens@orange.fr")
-                    ->setPhone("0633474960")
+                    ->setFirstName("Padel")
+                    ->setLastName("Time")
+                    ->setEmail("padeltime@gmail.com")
+                    ->setPhone("0633474961")
                     ->setRoles(['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_USER'])
                     ->setPassword($passwordHashed)
                     ->setVerified(true)
